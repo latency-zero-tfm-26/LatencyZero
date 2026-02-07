@@ -1,0 +1,17 @@
+pandas
+numpy
+matplotlib
+seaborn
+opencv-python
+tqdm
+tensorflow
+cloudscraper
+beautifulsoup4
+setuptools
+undetected-chromedriver
+selenium
+webdriver-manager
+requests
+easyocr
+Pillow
+wordcloud
