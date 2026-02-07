@@ -2,6 +2,11 @@
 
 Backend desarrollado en **FastAPI** para integrar modelos de Machine Learning, agentes con LLM y otras funcionalidades.
 
+## 📌 Diagrama Entidad-Relación
+
+![latencyzero](/backend/db/latencyzero.png)
+
+
 ## 📁 Estructura del proyecto
 
 ```
