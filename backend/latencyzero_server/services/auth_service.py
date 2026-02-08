@@ -26,7 +26,6 @@ def authenticate_user(db: Session, identifier: str, password: str) -> User:
 
 
 def register_user(db: Session, username: str, email: str, password: str) -> User:
-  """Register a new user. Validates that username and email don't exist and enforces strong passwords."""
   repo = UserRepository(db)
 
   email_normalized = email.strip().lower()
@@ -43,7 +42,6 @@ def register_user(db: Session, username: str, email: str, password: str) -> User
   return repo.create_user(username=username.strip(), email=email_normalized, hashed_password=hashed)
 
 def create_user(db: Session, username: str, email: str, password: str) -> User:
-  """Create a user without duplicate checks (useful for seeds/admin scripts)."""
   repo = UserRepository(db)
   email_normalized = email.strip().lower()
   validate_password_strength(password)
