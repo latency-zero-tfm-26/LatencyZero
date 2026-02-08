@@ -17,6 +17,7 @@ CREATE TABLE IF NOT EXISTS user (
     role ENUM('user','admin') DEFAULT 'user',
     create_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     image VARCHAR(255) NULL
+    email_confirmation_token VARCHAR(255) NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- ===========================
