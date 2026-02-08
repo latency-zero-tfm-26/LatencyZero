@@ -9,7 +9,7 @@ from ..repositories.user_repository import UserRepository
 from ..schemas.user import UserDTO, UserRole
 from ..utils.password import validate_password_strength
 from ..utils.security import verify_password, get_password_hash, create_access_token, create_email_confirmation_token
-from ..utils.email import send_email_gmail
+from ..utils.email import send_email_gmail, send_confirmation_email
 
 def authenticate_user(db: Session, identifier: str, password: str) -> User:
   repo = UserRepository(db)
@@ -29,8 +29,6 @@ def authenticate_user(db: Session, identifier: str, password: str) -> User:
   return user
 
 
-
-
 def register_user(db: Session, username: str, email: str, password: str, background_tasks: BackgroundTasks) -> User:
     repo = UserRepository(db)
 
@@ -46,15 +44,12 @@ def register_user(db: Session, username: str, email: str, password: str, backgro
     hashed = get_password_hash(password)
     user = repo.create_user(username=username.strip(), email=email_normalized, hashed_password=hashed)
 
-    # Token de confirmación de email
     token = create_email_confirmation_token(user.email)
 
-    # Enviar email en background usando Gmail OAuth2
-    background_tasks.add_task(send_email_gmail,
+    background_tasks.add_task(send_confirmation_email,
                               to_email=user.email,
-                              subject="Confirma tu email",
-                              body=f"Hola! Confirma tu email haciendo clic en este enlace: "
-                                f"<a href='http://localhost:8000/auth/confirm-email?token={token}'>Confirmar email</a>")
+                              token=token,
+                              username=user.username)
 
     return user
 
