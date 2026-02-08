@@ -14,3 +14,4 @@ class User(Base):
   role = Column(Enum("user", "admin", name="user_roles"), default="user")
   create_at = Column(TIMESTAMP, server_default=func.now())
   image = Column(String(255), nullable=True)
+  email_confirmation_token = Column(String(255), nullable=True)
