@@ -177,9 +177,9 @@ export class AgentService {
     }
   }
 
-  startWithSuggestion(text: string): void {
-    this.newChat();
-    setTimeout(() => this.sendMessage(text), 50);
+  async startWithSuggestion(text: string): Promise<void> {
+    await this.newChat();
+    await this.sendMessage(text);
   }
 
   formatTime(date: Date): string {
