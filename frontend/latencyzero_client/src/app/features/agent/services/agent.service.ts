@@ -1,16 +1,28 @@
 import { Injectable, computed, inject, signal } from '@angular/core';
-import { ChatSession } from '../interfaces/chatSession.interface';
-import { MOCK_CHAT_SESSIONS } from '../mocks/chat-sessions.mock';
+import { ChatSession } from '../interfaces/session.interface';
 import { AgentHttpService } from './agent-http.service';
 import { firstValueFrom } from 'rxjs';
+
+export interface ChatMessage {
+  id: string;
+  role: 'user' | 'assistant';
+  content: string;
+  timestamp: Date;
+}
+
+// Extiende la interfaz del backend con propiedades internas
+export interface ChatSessionInternal extends ChatSession {
+  messages: ChatMessage[];
+  preview: string;
+}
 
 @Injectable({ providedIn: 'root' })
 export class AgentService {
   private http = inject(AgentHttpService);
 
   readonly sidebarOpen = signal(typeof window !== 'undefined' ? window.innerWidth >= 768 : true);
-  readonly currentChatId = signal<string | null>(null);
-  readonly chatSessions = signal<ChatSession[]>(MOCK_CHAT_SESSIONS);
+  readonly currentChatId = signal<number | null>(null);
+  readonly chatSessions = signal<ChatSessionInternal[]>([]);
   readonly isTyping = signal(false);
 
   readonly currentSession = computed(
@@ -26,7 +38,7 @@ export class AgentService {
     const weekAgo = new Date(today.getTime() - 7 * 86_400_000);
     const monthAgo = new Date(today.getTime() - 30 * 86_400_000);
 
-    const groups: { label: string; sessions: ChatSession[] }[] = [
+    const groups: { label: string; sessions: ChatSessionInternal[] }[] = [
       { label: 'Hoy', sessions: [] },
       { label: 'Ayer', sessions: [] },
       { label: 'Últimos 7 días', sessions: [] },
@@ -35,11 +47,7 @@ export class AgentService {
     ];
 
     for (const session of this.chatSessions()) {
-      const d = new Date(
-        session.timestamp.getFullYear(),
-        session.timestamp.getMonth(),
-        session.timestamp.getDate(),
-      );
+      const d = new Date(session.create_at);
       if (d >= today) groups[0].sessions.push(session);
       else if (d >= yesterday) groups[1].sessions.push(session);
       else if (d >= weekAgo) groups[2].sessions.push(session);
@@ -54,7 +62,7 @@ export class AgentService {
     this.sidebarOpen.update((v) => !v);
   }
 
-  selectChat(id: string): void {
+  selectChat(id: number): void {
     this.currentChatId.set(id);
     if (typeof window !== 'undefined' && window.innerWidth < 768) {
       this.sidebarOpen.set(false);
@@ -64,21 +72,17 @@ export class AgentService {
   async newChat(): Promise<void> {
     try {
       const response = await firstValueFrom(this.http.create_session());
+      const session: ChatSessionInternal = {
+        id: response.session,
+        session_name: 'Nuevo chat',
+        create_at: new Date().toISOString(),
+        update_at: new Date().toISOString(),
+        messages: [],
+        preview: '',
+      };
 
-      const id = String(response.session);
-
-      this.chatSessions.update((sessions) => [
-        {
-          id,
-          title: 'Nueva conversación',
-          preview: '',
-          timestamp: new Date(),
-          messages: [],
-        },
-        ...sessions,
-      ]);
-
-      this.currentChatId.set(id);
+      this.chatSessions.update((sessions) => [session, ...sessions]);
+      this.currentChatId.set(session.id);
 
       if (typeof window !== 'undefined' && window.innerWidth < 768) {
         this.sidebarOpen.set(false);
@@ -88,7 +92,7 @@ export class AgentService {
     }
   }
 
-  deleteChat(id: string): void {
+  deleteChat(id: number): void {
     this.chatSessions.update((sessions) => sessions.filter((s) => s.id !== id));
     if (this.currentChatId() === id) {
       this.currentChatId.set(null);
@@ -102,24 +106,31 @@ export class AgentService {
     const chatId = this.currentChatId();
     if (!chatId) return;
 
-    const sessionId = Number(chatId);
-
     this.chatSessions.update((sessions) =>
       sessions.map((s) =>
         s.id === chatId
           ? {
               ...s,
               preview: trimmed,
-              title: s.messages.length === 0 ? this.generateTitle(trimmed) : s.title,
-              messages: [
-                ...s.messages,
-                {
-                  id: crypto.randomUUID(),
-                  role: 'user' as const,
-                  content: trimmed,
-                  timestamp: new Date(),
-                },
-              ],
+              messages:
+                s.messages?.length > 0
+                  ? [
+                      ...s.messages,
+                      {
+                        id: crypto.randomUUID(),
+                        role: 'user',
+                        content: trimmed,
+                        timestamp: new Date(),
+                      },
+                    ]
+                  : [
+                      {
+                        id: crypto.randomUUID(),
+                        role: 'user',
+                        content: trimmed,
+                        timestamp: new Date(),
+                      },
+                    ],
             }
           : s,
       ),
@@ -128,20 +139,17 @@ export class AgentService {
     this.isTyping.set(true);
 
     try {
-      const response = await firstValueFrom(
-        this.http.createMessage(sessionId, trimmed, 'llm', null),
-      );
-
+      const response = await firstValueFrom(this.http.createMessage(chatId, trimmed, 'llm', null));
       this.chatSessions.update((sessions) =>
         sessions.map((s) =>
           s.id === chatId
             ? {
                 ...s,
                 messages: [
-                  ...s.messages,
+                  ...(s.messages ?? []),
                   {
                     id: crypto.randomUUID(),
-                    role: 'assistant' as const,
+                    role: 'assistant',
                     content: response.bot_message,
                     timestamp: new Date(),
                   },
@@ -168,5 +176,26 @@ export class AgentService {
 
   private generateTitle(content: string): string {
     return content.length > 40 ? content.slice(0, 40) + '…' : content;
+  }
+
+  async loadSessions(): Promise<void> {
+    try {
+      const response = await firstValueFrom(this.http.getMySessions());
+
+      // Mapea la respuesta real del backend a ChatSessionInternal
+      const sessions: ChatSessionInternal[] = response.sessions.map((s) => ({
+        ...s,
+        messages: [],
+        preview: '',
+      }));
+
+      this.chatSessions.set(sessions);
+
+      if (sessions.length > 0) {
+        this.currentChatId.set(sessions[0].id);
+      }
+    } catch (error) {
+      console.error('Error cargando sesiones', error);
+    }
   }
 }

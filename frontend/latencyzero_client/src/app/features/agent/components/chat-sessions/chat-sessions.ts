@@ -10,7 +10,11 @@ import { AgentService } from '../../services/agent.service';
 export class ChatSessions {
   protected readonly s = inject(AgentService);
 
-  deleteChat(id: string, event: Event): void {
+  constructor() {
+    this.s.loadSessions();
+  }
+
+  deleteChat(id: number, event: Event): void {
     event.stopPropagation();
     this.s.deleteChat(id);
   }
