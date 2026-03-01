@@ -4,6 +4,7 @@ import { HardVisionPage } from './features/hardvision/pages/hard-vision-page/har
 import { HomePage } from './features/home/pages/home-page/home-page';
 import { DocsPage } from './features/docs/pages/docs-page.component/docs-page.component';
 import { AgentPage } from './features/agent/pages/agent-page/agent-page';
+import { AgentLayoutComponent } from './features/agent/layouts/agent.layout.component/agent.layout.component';
 
 export const routes: Routes = [
   {
@@ -21,14 +22,20 @@ export const routes: Routes = [
         title: 'HardVision AI'
       },
       {
-        path: 'agente',
-        component: AgentPage,
-        title: 'Agente'
-      },
-      {
         path: 'docs',
         component: DocsPage,
         title: 'Docs'
+      }
+    ]
+  },
+  {
+    path: 'agente',
+    component: AgentLayoutComponent,
+    children: [
+      {
+        path: '',
+        component: AgentPage,
+        title: 'Agente'
       }
     ]
   },
