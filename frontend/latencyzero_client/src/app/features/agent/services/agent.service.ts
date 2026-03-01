@@ -92,10 +92,17 @@ export class AgentService {
     }
   }
 
-  deleteChat(id: number): void {
-    this.chatSessions.update((sessions) => sessions.filter((s) => s.id !== id));
-    if (this.currentChatId() === id) {
-      this.currentChatId.set(null);
+  async deleteChat(id: number): Promise<void> {
+    try {
+      await firstValueFrom(this.http.deleteSession(id));
+
+      this.chatSessions.update((sessions) => sessions.filter((s) => s.id !== id));
+
+      if (this.currentChatId() === id) {
+        this.currentChatId.set(null);
+      }
+    } catch (error) {
+      console.error('Error eliminando sesión', error);
     }
   }
 
@@ -181,8 +188,6 @@ export class AgentService {
   async loadSessions(): Promise<void> {
     try {
       const response = await firstValueFrom(this.http.getMySessions());
-
-      // Mapea la respuesta real del backend a ChatSessionInternal
       const sessions: ChatSessionInternal[] = response.sessions.map((s) => ({
         ...s,
         messages: [],
