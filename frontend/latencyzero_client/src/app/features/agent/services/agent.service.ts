@@ -10,7 +10,6 @@ export interface ChatMessage {
   timestamp: Date;
 }
 
-// Extiende la interfaz del backend con propiedades internas
 export interface ChatSessionInternal extends ChatSession {
   messages: ChatMessage[];
   preview: string;
@@ -64,6 +63,12 @@ export class AgentService {
 
   selectChat(id: number): void {
     this.currentChatId.set(id);
+
+    const session = this.chatSessions().find((s) => s.id === id);
+    if (session && session.messages.length === 0) {
+      this.loadMessages(id);
+    }
+
     if (typeof window !== 'undefined' && window.innerWidth < 768) {
       this.sidebarOpen.set(false);
     }
@@ -198,9 +203,43 @@ export class AgentService {
 
       if (sessions.length > 0) {
         this.currentChatId.set(sessions[0].id);
+        const firstId = sessions[0].id;
+        this.currentChatId.set(firstId);
+        await this.loadMessages(firstId);
       }
     } catch (error) {
       console.error('Error cargando sesiones', error);
+    }
+  }
+
+  async loadMessages(session_id: number): Promise<void> {
+    try {
+      const responses = await firstValueFrom(this.http.getMessages(session_id));
+
+      const messages: ChatMessage[] = responses.flatMap((r) => [
+        {
+          id: crypto.randomUUID(),
+          role: 'user',
+          content: r.user_message,
+          timestamp: new Date(),
+        },
+        {
+          id: crypto.randomUUID(),
+          role: 'assistant',
+          content: r.bot_message,
+          timestamp: new Date(),
+        },
+      ]);
+
+      this.chatSessions.update((sessions) =>
+        sessions.map((s) =>
+          s.id === session_id
+            ? { ...s, messages, preview: messages[messages.length - 1]?.content || '' }
+            : s,
+        ),
+      );
+    } catch (error) {
+      console.error('Error cargando mensajes de la sesión', error);
     }
   }
 }
