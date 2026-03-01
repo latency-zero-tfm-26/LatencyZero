@@ -5,6 +5,7 @@ import { LOGIN_ENDPOINT, LOGOUT_ENDPOINT, REGISTER_ENDPOINT } from '../../config
 import { JwtService } from '../../core/services/jwt.service';
 import { RegisterDTO } from '../interfaces/register-dto.interface';
 import { Router } from '@angular/router';
+import { AgentService } from '../../features/agent/services/agent.service';
 
 type AuthStatus = 'checking' | 'authenticated' | 'not-authenticated';
 
@@ -16,13 +17,20 @@ export class AuthService {
   private http = inject(HttpClient);
   private jwt = inject(JwtService);
   private router = inject(Router);
+  private agentService = inject(AgentService);
 
   authStatus = computed<AuthStatus>(() => this._authStatus());
   username = computed(() => this._username());
 
   constructor() {
     this.jwt.init();
-    this._authStatus.set(this.jwt.isAuthenticated() ? 'authenticated' : 'not-authenticated');
+
+    const isAuth = this.jwt.isAuthenticated();
+    this._authStatus.set(isAuth ? 'authenticated' : 'not-authenticated');
+
+    if (isAuth) {
+      this._username.set(this.jwt.getName());
+    }
   }
 
   login(username: string, password: string): Observable<boolean> {
@@ -74,6 +82,8 @@ export class AuthService {
         )
         .subscribe();
     }
-  }
 
+    this.agentService.chatSessions.set([]);
+    this.agentService.currentChatId.set(null);
+  }
 }

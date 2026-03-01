@@ -17,11 +17,24 @@ export class JwtService {
   }
 
   init() {
-    const token = sessionStorage.getItem(this.TOKEN_KEY);
-    if (token && this.validateToken(token)) {
-      this.tokenSubject.next(token);
-      this.decodeToken(token);
-    } else {
+    const stored = localStorage.getItem(this.TOKEN_KEY);
+    if (!stored) {
+      this.clear();
+      return;
+    }
+
+    try {
+      const data = JSON.parse(stored);
+      const token = data.token;
+
+      if (token && this.validateToken(token)) {
+        this.tokenSubject.next(token);
+        this.role = data.role ?? null;
+        this.name = data.username ?? null;
+      } else {
+        this.clear();
+      }
+    } catch {
       this.clear();
     }
   }
@@ -62,13 +75,13 @@ export class JwtService {
     if (this.role === 'admin') {
       this.tokenSubject.next(token);
     } else {
-      sessionStorage.setItem(this.TOKEN_KEY, token);
+      localStorage.setItem(this.TOKEN_KEY, token);
       this.tokenSubject.next(token);
     }
   }
 
   public clear(): void {
-    sessionStorage.removeItem(this.TOKEN_KEY);
+    localStorage.removeItem(this.TOKEN_KEY);
     this.tokenSubject.next(null);
     this.role = this.name = null;
     this.id = null;
@@ -99,7 +112,7 @@ export class JwtService {
 
   public getJwt(): string | null {
     try {
-      const data = JSON.parse(sessionStorage.getItem(this.TOKEN_KEY) || 'null');
+      const data = JSON.parse(localStorage.getItem(this.TOKEN_KEY) || 'null');
       return data?.token || null;
     } catch {
       return null;
