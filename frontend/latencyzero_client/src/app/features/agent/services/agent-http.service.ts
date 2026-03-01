@@ -12,11 +12,10 @@ import { DeleteSessionResponse, SessionsResponse } from '../interfaces/session.i
 export class AgentHttpService {
   private http = inject(HttpClient);
 
-  create_session(username: string, password: string): Observable<CreateSessionResponse> {
+  create_session(): Observable<CreateSessionResponse> {
     return this.http
       .post<CreateSessionResponse>(
         CREATE_SESSION,
-        { username, password },
         { withCredentials: true },
       )
       .pipe(
