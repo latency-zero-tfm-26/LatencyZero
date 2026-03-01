@@ -95,12 +95,14 @@ export class AgentService {
     }
   }
 
-  sendMessage(content: string): void {
+  async sendMessage(content: string): Promise<void> {
     const trimmed = content.trim();
     if (!trimmed || this.isTyping()) return;
 
     const chatId = this.currentChatId();
     if (!chatId) return;
+
+    const sessionId = Number(chatId);
 
     this.chatSessions.update((sessions) =>
       sessions.map((s) =>
@@ -125,8 +127,11 @@ export class AgentService {
 
     this.isTyping.set(true);
 
-    // TODO: Simulación de respuesta del agente, cambiar por llamada real
-    setTimeout(() => {
+    try {
+      const response = await firstValueFrom(
+        this.http.createMessage(sessionId, trimmed, 'llm', null),
+      );
+
       this.chatSessions.update((sessions) =>
         sessions.map((s) =>
           s.id === chatId
@@ -137,8 +142,7 @@ export class AgentService {
                   {
                     id: crypto.randomUUID(),
                     role: 'assistant' as const,
-                    content:
-                      'Esta es una respuesta simulada del agente IA de LatencyZero. En la implementación real, aquí aparecería la respuesta generada por el modelo de lenguaje para ayudarte a construir tu PC ideal.',
+                    content: response.bot_message,
                     timestamp: new Date(),
                   },
                 ],
@@ -146,8 +150,11 @@ export class AgentService {
             : s,
         ),
       );
+    } catch (error) {
+      console.error('Error enviando mensaje', error);
+    } finally {
       this.isTyping.set(false);
-    }, 2000);
+    }
   }
 
   startWithSuggestion(text: string): void {
