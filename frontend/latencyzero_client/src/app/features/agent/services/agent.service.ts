@@ -193,6 +193,7 @@ export class AgentService {
   async loadSessions(): Promise<void> {
     try {
       const response = await firstValueFrom(this.http.getMySessions());
+
       const sessions: ChatSessionInternal[] = response.sessions.map((s) => ({
         ...s,
         messages: [],
@@ -201,12 +202,7 @@ export class AgentService {
 
       this.chatSessions.set(sessions);
 
-      if (sessions.length > 0) {
-        this.currentChatId.set(sessions[0].id);
-        const firstId = sessions[0].id;
-        this.currentChatId.set(firstId);
-        await this.loadMessages(firstId);
-      }
+      this.currentChatId.set(null);
     } catch (error) {
       console.error('Error cargando sesiones', error);
     }
