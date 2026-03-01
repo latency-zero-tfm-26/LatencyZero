@@ -4,7 +4,6 @@ import { JwtPayload, jwtDecode } from 'jwt-decode';
 
 @Injectable({ providedIn: 'root' })
 export class JwtService {
-
   private readonly TOKEN_KEY = 'token';
   private tokenSubject = new BehaviorSubject<string | null>(null);
   public token$ = this.tokenSubject.asObservable();
@@ -48,7 +47,7 @@ export class JwtService {
     }
   }
 
-public setToken(token: string): void {
+  public setToken(token: string): void {
     let decoded: any;
     try {
       decoded = jwtDecode<JwtPayload>(token);
@@ -84,11 +83,26 @@ public setToken(token: string): void {
     return token ? this.validateToken(token) : false;
   }
 
-  public getRole(): string | null { return this.role; }
-  public getName(): string | null { return this.name; }
-  public getId(): number | null { return this.id; }
+  public getRole(): string | null {
+    return this.role;
+  }
+  public getName(): string | null {
+    return this.name;
+  }
+  public getId(): number | null {
+    return this.id;
+  }
 
   public hasRole(role: string): boolean {
     return this.role === role;
+  }
+
+  public getJwt(): string | null {
+    try {
+      const data = JSON.parse(sessionStorage.getItem(this.TOKEN_KEY) || 'null');
+      return data?.token || null;
+    } catch {
+      return null;
+    }
   }
 }
