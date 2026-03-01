@@ -111,7 +111,7 @@ export class AgentService {
     }
   }
 
-  async sendMessage(content: string): Promise<void> {
+  async sendMessage(content: string, userFile: File | null = null): Promise<void> {
     const trimmed = content.trim();
     if (!trimmed || this.isTyping()) return;
 
@@ -124,25 +124,15 @@ export class AgentService {
           ? {
               ...s,
               preview: trimmed,
-              messages:
-                s.messages?.length > 0
-                  ? [
-                      ...s.messages,
-                      {
-                        id: crypto.randomUUID(),
-                        role: 'user',
-                        content: trimmed,
-                        timestamp: new Date(),
-                      },
-                    ]
-                  : [
-                      {
-                        id: crypto.randomUUID(),
-                        role: 'user',
-                        content: trimmed,
-                        timestamp: new Date(),
-                      },
-                    ],
+              messages: [
+                ...s.messages,
+                {
+                  id: crypto.randomUUID(),
+                  role: 'user',
+                  content: trimmed,
+                  timestamp: new Date(),
+                },
+              ],
             }
           : s,
       ),
@@ -151,14 +141,19 @@ export class AgentService {
     this.isTyping.set(true);
 
     try {
-      const response = await firstValueFrom(this.http.createMessage(chatId, trimmed, 'llm', null));
+      const toolsMode: 'llm' | 'ml_model' = userFile ? 'ml_model' : 'llm';
+
+      const response = await firstValueFrom(
+        this.http.createMessage(chatId, trimmed, toolsMode, userFile),
+      );
+
       this.chatSessions.update((sessions) =>
         sessions.map((s) =>
           s.id === chatId
             ? {
                 ...s,
                 messages: [
-                  ...(s.messages ?? []),
+                  ...s.messages,
                   {
                     id: crypto.randomUUID(),
                     role: 'assistant',
