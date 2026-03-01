@@ -1,17 +1,20 @@
-import { Injectable, computed, signal } from '@angular/core';
+import { Injectable, computed, inject, signal } from '@angular/core';
 import { ChatSession } from '../interfaces/chatSession.interface';
 import { MOCK_CHAT_SESSIONS } from '../mocks/chat-sessions.mock';
+import { AgentHttpService } from './agent-http.service';
+import { firstValueFrom } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class AgentService {
+  private http = inject(AgentHttpService);
 
   readonly sidebarOpen = signal(typeof window !== 'undefined' ? window.innerWidth >= 768 : true);
   readonly currentChatId = signal<string | null>(null);
   readonly chatSessions = signal<ChatSession[]>(MOCK_CHAT_SESSIONS);
   readonly isTyping = signal(false);
 
-  readonly currentSession = computed(() =>
-    this.chatSessions().find((s) => s.id === this.currentChatId()) ?? null
+  readonly currentSession = computed(
+    () => this.chatSessions().find((s) => s.id === this.currentChatId()) ?? null,
   );
 
   readonly currentMessages = computed(() => this.currentSession()?.messages ?? []);
@@ -58,15 +61,30 @@ export class AgentService {
     }
   }
 
-  newChat(): void {
-    const id = crypto.randomUUID();
-    this.chatSessions.update((sessions) => [
-      { id, title: 'Nueva conversación', preview: '', timestamp: new Date(), messages: [] },
-      ...sessions,
-    ]);
-    this.currentChatId.set(id);
-    if (typeof window !== 'undefined' && window.innerWidth < 768) {
-      this.sidebarOpen.set(false);
+  async newChat(): Promise<void> {
+    try {
+      const response = await firstValueFrom(this.http.create_session());
+
+      const id = String(response.session);
+
+      this.chatSessions.update((sessions) => [
+        {
+          id,
+          title: 'Nueva conversación',
+          preview: '',
+          timestamp: new Date(),
+          messages: [],
+        },
+        ...sessions,
+      ]);
+
+      this.currentChatId.set(id);
+
+      if (typeof window !== 'undefined' && window.innerWidth < 768) {
+        this.sidebarOpen.set(false);
+      }
+    } catch (error) {
+      console.error('Error creando sesión real', error);
     }
   }
 
@@ -93,7 +111,12 @@ export class AgentService {
               title: s.messages.length === 0 ? this.generateTitle(trimmed) : s.title,
               messages: [
                 ...s.messages,
-                { id: crypto.randomUUID(), role: 'user' as const, content: trimmed, timestamp: new Date() },
+                {
+                  id: crypto.randomUUID(),
+                  role: 'user' as const,
+                  content: trimmed,
+                  timestamp: new Date(),
+                },
               ],
             }
           : s,
