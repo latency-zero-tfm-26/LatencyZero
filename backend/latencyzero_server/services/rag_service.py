@@ -43,7 +43,7 @@ def get_rag_chain():
     )
 
     # 5. Leer el System Prompt desde el archivo markdown
-    prompt_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "system_prompt.md"))
+    prompt_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "system_prompt.md"))
     try:
         with open(prompt_path, "r", encoding="utf-8") as f:
             system_prompt = f.read()
