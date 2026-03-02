@@ -23,5 +23,5 @@ langchain-groq
 langchain-milvus
 langchain-huggingface
 pymilvus
-# chromadb
-# sentence-transformers
+# # chromadb
+# # sentence-transformers
