@@ -9,13 +9,13 @@ class Chat(Base):
     __tablename__ = "chat"
 
     id = Column(Integer, primary_key=True, index=True)
-    user_id = Column(Integer, ForeignKey("user.id", ondelete="CASCADE"), nullable=False)
+    user_id = Column(Integer, ForeignKey("user.id", ondelete="CASCADE"), nullable=True)
     session_id = Column(Integer, ForeignKey("sessions.id", ondelete="CASCADE"), nullable=False)
     user_message = Column(String(2000), nullable=False)
     bot_message = Column(String(4000), nullable=True)
     create_at = Column(TIMESTAMP, server_default=func.now())
     tools_mode = Column(
-        Enum("llm", "ml_model", "search", "other", name="tools_mode_enum"),
+        Enum("llm", "ml_model", name="tools_mode_enum"),
         default="llm"
     )
     bot_files = Column(JSON, nullable=True)

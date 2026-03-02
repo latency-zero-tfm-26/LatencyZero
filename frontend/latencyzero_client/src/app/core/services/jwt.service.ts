@@ -4,7 +4,6 @@ import { JwtPayload, jwtDecode } from 'jwt-decode';
 
 @Injectable({ providedIn: 'root' })
 export class JwtService {
-
   private readonly TOKEN_KEY = 'token';
   private tokenSubject = new BehaviorSubject<string | null>(null);
   public token$ = this.tokenSubject.asObservable();
@@ -18,11 +17,24 @@ export class JwtService {
   }
 
   init() {
-    const token = sessionStorage.getItem(this.TOKEN_KEY);
-    if (token && this.validateToken(token)) {
-      this.tokenSubject.next(token);
-      this.decodeToken(token);
-    } else {
+    const stored = localStorage.getItem(this.TOKEN_KEY);
+    if (!stored) {
+      this.clear();
+      return;
+    }
+
+    try {
+      const data = JSON.parse(stored);
+      const token = data.token;
+
+      if (token && this.validateToken(token)) {
+        this.tokenSubject.next(token);
+        this.role = data.role ?? null;
+        this.name = data.username ?? null;
+      } else {
+        this.clear();
+      }
+    } catch {
       this.clear();
     }
   }
@@ -48,7 +60,7 @@ export class JwtService {
     }
   }
 
-public setToken(token: string): void {
+  public setToken(token: string): void {
     let decoded: any;
     try {
       decoded = jwtDecode<JwtPayload>(token);
@@ -63,13 +75,13 @@ public setToken(token: string): void {
     if (this.role === 'admin') {
       this.tokenSubject.next(token);
     } else {
-      sessionStorage.setItem(this.TOKEN_KEY, token);
+      localStorage.setItem(this.TOKEN_KEY, token);
       this.tokenSubject.next(token);
     }
   }
 
   public clear(): void {
-    sessionStorage.removeItem(this.TOKEN_KEY);
+    localStorage.removeItem(this.TOKEN_KEY);
     this.tokenSubject.next(null);
     this.role = this.name = null;
     this.id = null;
@@ -84,11 +96,26 @@ public setToken(token: string): void {
     return token ? this.validateToken(token) : false;
   }
 
-  public getRole(): string | null { return this.role; }
-  public getName(): string | null { return this.name; }
-  public getId(): number | null { return this.id; }
+  public getRole(): string | null {
+    return this.role;
+  }
+  public getName(): string | null {
+    return this.name;
+  }
+  public getId(): number | null {
+    return this.id;
+  }
 
   public hasRole(role: string): boolean {
     return this.role === role;
+  }
+
+  public getJwt(): string | null {
+    try {
+      const data = JSON.parse(localStorage.getItem(this.TOKEN_KEY) || 'null');
+      return data?.token || null;
+    } catch {
+      return null;
+    }
   }
 }

@@ -1,17 +1,31 @@
-import { Injectable, computed, signal } from '@angular/core';
-import { ChatSession } from '../interfaces/chatSession.interface';
-import { MOCK_CHAT_SESSIONS } from '../mocks/chat-sessions.mock';
+import { Injectable, computed, inject, signal } from '@angular/core';
+import { ChatSession } from '../interfaces/session.interface';
+import { AgentHttpService } from './agent-http.service';
+import { firstValueFrom } from 'rxjs';
+
+export interface ChatMessage {
+  id: string;
+  role: 'user' | 'assistant';
+  content: string;
+  timestamp: Date;
+}
+
+export interface ChatSessionInternal extends ChatSession {
+  messages: ChatMessage[];
+  preview: string;
+}
 
 @Injectable({ providedIn: 'root' })
 export class AgentService {
+  private http = inject(AgentHttpService);
 
   readonly sidebarOpen = signal(typeof window !== 'undefined' ? window.innerWidth >= 768 : true);
-  readonly currentChatId = signal<string | null>(null);
-  readonly chatSessions = signal<ChatSession[]>(MOCK_CHAT_SESSIONS);
+  readonly currentChatId = signal<number | null>(null);
+  readonly chatSessions = signal<ChatSessionInternal[]>([]);
   readonly isTyping = signal(false);
 
-  readonly currentSession = computed(() =>
-    this.chatSessions().find((s) => s.id === this.currentChatId()) ?? null
+  readonly currentSession = computed(
+    () => this.chatSessions().find((s) => s.id === this.currentChatId()) ?? null,
   );
 
   readonly currentMessages = computed(() => this.currentSession()?.messages ?? []);
@@ -23,7 +37,7 @@ export class AgentService {
     const weekAgo = new Date(today.getTime() - 7 * 86_400_000);
     const monthAgo = new Date(today.getTime() - 30 * 86_400_000);
 
-    const groups: { label: string; sessions: ChatSession[] }[] = [
+    const groups: { label: string; sessions: ChatSessionInternal[] }[] = [
       { label: 'Hoy', sessions: [] },
       { label: 'Ayer', sessions: [] },
       { label: 'Últimos 7 días', sessions: [] },
@@ -32,11 +46,7 @@ export class AgentService {
     ];
 
     for (const session of this.chatSessions()) {
-      const d = new Date(
-        session.timestamp.getFullYear(),
-        session.timestamp.getMonth(),
-        session.timestamp.getDate(),
-      );
+      const d = new Date(session.create_at);
       if (d >= today) groups[0].sessions.push(session);
       else if (d >= yesterday) groups[1].sessions.push(session);
       else if (d >= weekAgo) groups[2].sessions.push(session);
@@ -51,33 +61,57 @@ export class AgentService {
     this.sidebarOpen.update((v) => !v);
   }
 
-  selectChat(id: string): void {
+  selectChat(id: number): void {
     this.currentChatId.set(id);
+
+    const session = this.chatSessions().find((s) => s.id === id);
+    if (session && session.messages.length === 0) {
+      this.loadMessages(id);
+    }
+
     if (typeof window !== 'undefined' && window.innerWidth < 768) {
       this.sidebarOpen.set(false);
     }
   }
 
-  newChat(): void {
-    const id = crypto.randomUUID();
-    this.chatSessions.update((sessions) => [
-      { id, title: 'Nueva conversación', preview: '', timestamp: new Date(), messages: [] },
-      ...sessions,
-    ]);
-    this.currentChatId.set(id);
-    if (typeof window !== 'undefined' && window.innerWidth < 768) {
-      this.sidebarOpen.set(false);
+  async newChat(): Promise<void> {
+    try {
+      const response = await firstValueFrom(this.http.create_session());
+      const session: ChatSessionInternal = {
+        id: response.session,
+        session_name: 'Nuevo chat',
+        create_at: new Date().toISOString(),
+        update_at: new Date().toISOString(),
+        messages: [],
+        preview: '',
+      };
+
+      this.chatSessions.update((sessions) => [session, ...sessions]);
+      this.currentChatId.set(session.id);
+
+      if (typeof window !== 'undefined' && window.innerWidth < 768) {
+        this.sidebarOpen.set(false);
+      }
+    } catch (error) {
+      console.error('Error creando sesión real', error);
     }
   }
 
-  deleteChat(id: string): void {
-    this.chatSessions.update((sessions) => sessions.filter((s) => s.id !== id));
-    if (this.currentChatId() === id) {
-      this.currentChatId.set(null);
+  async deleteChat(id: number): Promise<void> {
+    try {
+      await firstValueFrom(this.http.deleteSession(id));
+
+      this.chatSessions.update((sessions) => sessions.filter((s) => s.id !== id));
+
+      if (this.currentChatId() === id) {
+        this.currentChatId.set(null);
+      }
+    } catch (error) {
+      console.error('Error eliminando sesión', error);
     }
   }
 
-  sendMessage(content: string): void {
+  async sendMessage(content: string, userFile: File | null = null): Promise<void> {
     const trimmed = content.trim();
     if (!trimmed || this.isTyping()) return;
 
@@ -90,10 +124,14 @@ export class AgentService {
           ? {
               ...s,
               preview: trimmed,
-              title: s.messages.length === 0 ? this.generateTitle(trimmed) : s.title,
               messages: [
                 ...s.messages,
-                { id: crypto.randomUUID(), role: 'user' as const, content: trimmed, timestamp: new Date() },
+                {
+                  id: crypto.randomUUID(),
+                  role: 'user',
+                  content: trimmed,
+                  timestamp: new Date(),
+                },
               ],
             }
           : s,
@@ -102,8 +140,13 @@ export class AgentService {
 
     this.isTyping.set(true);
 
-    // TODO: Simulación de respuesta del agente, cambiar por llamada real
-    setTimeout(() => {
+    try {
+      const toolsMode: 'llm' | 'ml_model' = userFile ? 'ml_model' : 'llm';
+
+      const response = await firstValueFrom(
+        this.http.createMessage(chatId, trimmed, toolsMode, userFile),
+      );
+
       this.chatSessions.update((sessions) =>
         sessions.map((s) =>
           s.id === chatId
@@ -113,9 +156,8 @@ export class AgentService {
                   ...s.messages,
                   {
                     id: crypto.randomUUID(),
-                    role: 'assistant' as const,
-                    content:
-                      'Esta es una respuesta simulada del agente IA de LatencyZero. En la implementación real, aquí aparecería la respuesta generada por el modelo de lenguaje para ayudarte a construir tu PC ideal.',
+                    role: 'assistant',
+                    content: response.bot_message,
                     timestamp: new Date(),
                   },
                 ],
@@ -123,13 +165,16 @@ export class AgentService {
             : s,
         ),
       );
+    } catch (error) {
+      console.error('Error enviando mensaje', error);
+    } finally {
       this.isTyping.set(false);
-    }, 2000);
+    }
   }
 
-  startWithSuggestion(text: string): void {
-    this.newChat();
-    setTimeout(() => this.sendMessage(text), 50);
+  async startWithSuggestion(text: string): Promise<void> {
+    await this.newChat();
+    await this.sendMessage(text);
   }
 
   formatTime(date: Date): string {
@@ -138,5 +183,54 @@ export class AgentService {
 
   private generateTitle(content: string): string {
     return content.length > 40 ? content.slice(0, 40) + '…' : content;
+  }
+
+  async loadSessions(): Promise<void> {
+    try {
+      const response = await firstValueFrom(this.http.getMySessions());
+
+      const sessions: ChatSessionInternal[] = response.sessions.map((s) => ({
+        ...s,
+        messages: [],
+        preview: '',
+      }));
+
+      this.chatSessions.set(sessions);
+
+      this.currentChatId.set(null);
+    } catch (error) {
+      console.error('Error cargando sesiones', error);
+    }
+  }
+
+  async loadMessages(session_id: number): Promise<void> {
+    try {
+      const responses = await firstValueFrom(this.http.getMessages(session_id));
+
+      const messages: ChatMessage[] = responses.flatMap((r) => [
+        {
+          id: crypto.randomUUID(),
+          role: 'user',
+          content: r.user_message,
+          timestamp: new Date(),
+        },
+        {
+          id: crypto.randomUUID(),
+          role: 'assistant',
+          content: r.bot_message,
+          timestamp: new Date(),
+        },
+      ]);
+
+      this.chatSessions.update((sessions) =>
+        sessions.map((s) =>
+          s.id === session_id
+            ? { ...s, messages, preview: messages[messages.length - 1]?.content || '' }
+            : s,
+        ),
+      );
+    } catch (error) {
+      console.error('Error cargando mensajes de la sesión', error);
+    }
   }
 }

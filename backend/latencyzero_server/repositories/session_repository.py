@@ -20,4 +20,21 @@ class SessionRepository(BaseRepository[SessionModel]):
     return self.create(session)
 
   def get_sessions_for_user(self, user: User):
-    return self.db.query(SessionModel).filter(SessionModel.user_id == user.id).all()
+    return (
+      self.db.query(SessionModel)
+      .filter(SessionModel.user_id == user.id)
+      .order_by(SessionModel.update_at.desc()) 
+      .all()
+    )
+  
+  def get_session_by_id(self, session_id: int) -> Optional[SessionModel]:
+    return self.db.query(SessionModel).filter(SessionModel.id == session_id).first()
+  
+  def get_session_by_id_and_user(self, session_id: int, user_id: int) -> Optional[SessionModel]:
+    return self.db.query(SessionModel).filter(SessionModel.id == session_id, SessionModel.user_id == user_id).first()
+  
+  def delete_by_id(self, session_id: int):
+    session = self.get_session_by_id(session_id)
+    if session:
+      self.db.delete(session)
+      self.db.commit()

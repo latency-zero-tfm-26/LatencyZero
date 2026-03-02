@@ -63,7 +63,7 @@
         (click)="s.selectChat(session.id)">
         <div class="flex-1 min-w-0">
           <p class="text-sm font-medium truncate leading-snug" [class]="s.currentChatId() === session.id ? 'text-yellow-300' : 'text-slate-200'">
-            {{ session.title }}
+            {{ session.session_name }}
           </p>
           <p class="text-xs text-slate-500 truncate mt-0.5">
             {{ session.preview || 'Sin mensajes' }}

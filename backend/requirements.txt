@@ -17,5 +17,11 @@ transformers
 Pillow
 opencv-python
 python-multipart
-chromadb
-sentence-transformers
+langchain
+langchain-core
+langchain-groq
+langchain-milvus
+langchain-huggingface
+pymilvus
+# chromadb
+# sentence-transformers
