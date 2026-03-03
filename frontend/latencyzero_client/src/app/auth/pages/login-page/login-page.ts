@@ -4,6 +4,7 @@ import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { FormUtils } from '../../../../utils/form-utils';
 import { JwtService } from '../../../core/services/jwt.service';
+import { NgToastService } from 'ng-angular-popup';
 
 @Component({
   selector: 'app-login-page',
@@ -12,11 +13,11 @@ import { JwtService } from '../../../core/services/jwt.service';
   styleUrl: './login-page.css',
 })
 export class LoginPage {
-
   private fb = inject(FormBuilder);
   private router = inject(Router);
   private authService = inject(AuthService);
   private jwtService = inject(JwtService);
+  private toast = inject(NgToastService);
   formUtils = FormUtils;
 
   showPassword: boolean = false;
@@ -28,7 +29,7 @@ export class LoginPage {
 
   loginForm = this.fb.group({
     username: ['', [Validators.required]],
-    password: ['', [Validators.required, Validators.pattern(FormUtils.passwordPattern)]]
+    password: ['', [Validators.required, Validators.pattern(FormUtils.passwordPattern)]],
   });
 
   togglePasswordVisibility(): void {
@@ -41,17 +42,18 @@ export class LoginPage {
     if (this.loginForm.valid) {
       const { username = '', password = '' } = this.loginForm.value;
 
-      this.authService.login(username!, password!).subscribe((isAuthenticated) => {
-        if (isAuthenticated) {
+      this.authService.login(username!, password!).subscribe((res) => {
+        if (res.success) {
           const role = this.jwtService.getRole();
           if (role === 'ROLE_ADMIN') {
             window.location.replace(`/admin/`);
           } else {
             this.router.navigateByUrl('/');
           }
+        } else {
+          this.toast.danger(res.error || 'Login fallido');
         }
       });
     }
-
   }
 }

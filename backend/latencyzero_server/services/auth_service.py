@@ -24,7 +24,7 @@ def authenticate_user(db: Session, identifier: str, password: str) -> User:
     raise InvalidCredentialsException()
   
   if user.is_banned:
-    raise HTTPException(status_code=401, detail="User is banned")
+    raise HTTPException(status_code=403, detail="User is banned")
 
   return user
 

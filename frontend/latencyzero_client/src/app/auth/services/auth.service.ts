@@ -31,7 +31,8 @@ export class AuthService {
     }
   }
 
-login(username: string, password: string): Observable<boolean> {
+// auth.service.ts
+login(username: string, password: string): Observable<{ success: boolean; error?: string }> {
   return this.http
     .post<{ username: string; token: string; role: string }>(
       LOGIN_ENDPOINT,
@@ -43,14 +44,18 @@ login(username: string, password: string): Observable<boolean> {
         this.jwt.setSession(response);
         this._authStatus.set('authenticated');
         this._username.set(response.username);
-        return true;
+        return { success: true };
       }),
-      catchError(() => {
-        this._authStatus.set('not-authenticated');
-        return of(false);
-      }),
+      catchError((error) => {
+        let msg = 'Error desconocido';
+        if (error.status === 401) msg = 'Usuario o contraseña incorrectos';
+        else if (error.status === 403) msg = 'Usuario bloqueado o no autorizado';
+        else if (error.status === 500) msg = 'Error del servidor';
+        return of({ success: false, error: msg });
+      })
     );
 }
+
   register(registerDTO: RegisterDTO): Observable<boolean> {
     return this.http.post<{ created: boolean }>(REGISTER_ENDPOINT, registerDTO).pipe(
       map((response) => {
