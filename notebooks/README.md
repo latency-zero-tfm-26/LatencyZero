@@ -29,10 +29,12 @@ Estos notebooks realizan la extracción de datos desde distintas fuentes web de 
 
 | Nombre del Cuaderno | Descripción |
 |---------------------|-------------|
-| `scraping_pccomponentes.ipynb` | Realiza scraping de datos de componentes de PC desde PCComponentes. |
-| `scraping_processors.ipynb` | Realiza scraping de datos específicos de procesadores. |
-| `scraping_pcpartpicker.ipynb`| Realiza scraping de datos de componentes desde PCPartPicker. |
-| `scraping_steam.ipynb`| Este cuaderno Jupyter contiene el codigo fuente encargado de la extraccion automatica de datos desde la plataforma **Steam**. |
+| `scraping_pccomponentes.ipynb` | Realiza un scraping generico a PcCompoenentes de cada componente de cada categoria. |
+| `scraping_pcpartpicker.ipynb`| Realiza un scraping generico y completo a PCPartPicker de cada componente de cada categoria. |
+| `scraping_pcpartpicker_motherboards.ipynb`| Realiza un scraping preciso a las placas bases de PCPartPicker, recogiendo y adjuntando cada componente de cada categoria compatible con cada placa base recolectada. |
+| `scraping_pangoly.ipynb`| Realiza un scraping preciso a las placas bases de Pangoly, recogiendo y adjuntando cada componente de cada categoria compatible con cada placa base recolectada. |
+| `scraping_steam.ipynb`| Realiza un scarping a Steam de los requisitos minimos y recomendados de una gran variedad de videojuegos y de los componentes de Hardware mas utilizados por los usuarios de la plataforma. |
+| `scraping_techpowerup.ipynb`| Realiza un scraping preciso y completo a las CPUs de TechPowerUp. |
 
 
 ## 🐍 Versión de Python
