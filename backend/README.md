@@ -48,6 +48,11 @@ SECRET_KEY=
 
 # CORS
 CORS_ORIGINS=
+
+# Agente
+GROQ_API_KEY=
+ZILLIZ_URI=
+ZILLIZ_TOKEN=
 ```
 
 ⚠️ Asegúrate de completar los valores necesarios antes de ejecutar el servidor.
