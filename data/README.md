@@ -7,6 +7,8 @@ Las fuentes de información incluyeron sitios web especializados en componentes 
 - [PCComponentes](https://www.pccomponentes.com)  
 - [TechPowerUp](https://www.techpowerup.com)  
 - [PCPartPicker](https://pcpartpicker.com)
+- [Pangoly](https://pangoly.com)
+- [Steam](https://store.steampowered.com)
 
 Estos portales proporcionan información detallada sobre marcas, modelos y especificaciones técnicas, lo que permitió construir un dataset representativo y de calidad para el entrenamiento del modelo.
 
@@ -26,11 +28,48 @@ Además, se incluyen requisitos de hardware para videojuegos obtenidos mediante 
 │   ├── components_02.csv
 │   ├── components_03.csv
 │   └── components_04.csv
+│
 └── raw
+    ├── ai_db_vectorial
+    │   ├── cases_pcpartpicker.jsonl
+    │   ├── cpu_cooler_pcpartpicker.jsonl
+    │   ├── cpu_pcpartpicker.jsonl
+    │   ├── gpu_pcpartpicker.jsonl
+    │   ├── hw_survey_full.json
+    │   ├── monitor_pcpartpicker.jsonl
+    │   ├── motherboard_pcpartpicker.jsonl
+    │   ├── os_pcpartpicker.jsonl
+    │   ├── pangoly.jsonl
+    │   ├── pcpartpicker_motherboards+components.jsonl
+    │   ├── productos_cpu.json
+    │   ├── productos_pccomponentes.json
+    │   ├── psu_pcpartpicker.jsonl
+    │   ├── ram_pcpartpicker.jsonl
+    │   ├── req_minimos.json
+    │   ├── req_recomendados.json
+    │   ├── storage_pcpartpicker.jsonl
+    │   ├── top1_hw.json
+    │   ├── top2_hw.json
+    │   └── top3_hw.json
+    │
+    ├── pangoly
+    │   └── pangoly.jsonl
+    │
     ├── pccomponentes
     │   ├── productos_pccomponentes.csv
     │   └── productos_pccomponentes.json
+    │
     ├── pcpartpicker
+    │   ├── cases_pcpartpicker.jsonl
+    │   ├── cpu_cooler_pcpartpicker.jsonl
+    │   ├── cpu_pcpartpicker.jsonl
+    │   ├── gpu_pcpartpicker.jsonl
+    │   ├── monitor_pcpartpicker.jsonl
+    │   ├── motherboard_pcpartpicker.jsonl
+    │   ├── os_pcpartpicker.jsonl
+    │   ├── psu_pcpartpicker.jsonl
+    │   ├── ram_pcpartpicker.jsonl
+    │   ├── storage_pcpartpicker.jsonl
     │   ├── csv
     │   │   ├── cases_pspartpicker.csv
     │   │   ├── cpu_cooler_pspartpicker.csv
@@ -42,6 +81,7 @@ Además, se incluyen requisitos de hardware para videojuegos obtenidos mediante 
     │   │   ├── psu_pspartpicker.csv
     │   │   ├── ram_pspartpicker.csv
     │   │   └── storage_pspartpicker.csv
+    │   │
     │   └── json
     │       ├── cases_pspartpicker.json
     │       ├── cpu_cooler_pspartpicker.json
@@ -53,23 +93,26 @@ Además, se incluyen requisitos de hardware para videojuegos obtenidos mediante 
     │       ├── psu_pspartpicker.json
     │       ├── ram_pspartpicker.json
     │       └── storage_pspartpicker.json
+    │
     ├── steam
     │   ├── csv_data
     │   │   ├── hw_survey_full.csv
-    │   │   ├── ranked_hardware
-    │   │   │   ├── top1_hw.csv
-    │   │   │   ├── top2_hw.csv
-    │   │   │   └── top3_hw.csv
     │   │   ├── req_minimos.csv
-    │   │   └── req_recomendados.csv
+    │   │   ├── req_recomendados.csv
+    │   │   └── ranked_hardware/
+    │   │       ├── top1_hw.csv
+    │   │       ├── top2_hw.csv
+    │   │       └── top3_hw.csv
+    │   │
     │   └── json_data
     │       ├── hw_survey_full.json
-    │       ├── ranked_hardware
-    │       │   ├── top1_hw.json
-    │       │   ├── top2_hw.json
-    │       │   └── top3_hw.json
     │       ├── req_minimos.json
-    │       └── req_recomendados.json
+    │       ├── req_recomendados.json
+    │       └── ranked_hardware/
+    │           ├── top1_hw.json
+    │           ├── top2_hw.json
+    │           └── top3_hw.json
+    │
     └── techpowerup
         ├── productos_cpu.csv
         └── productos_cpu.json
