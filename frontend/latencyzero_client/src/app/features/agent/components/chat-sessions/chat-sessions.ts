@@ -6,6 +6,7 @@ import { AgentService } from '../../services/agent.service';
   imports: [],
   templateUrl: './chat-sessions.html',
   styleUrl: './chat-sessions.css',
+  host: { class: 'flex h-full min-h-0 shrink-0' },
 })
 export class ChatSessions {
   protected readonly s = inject(AgentService);
