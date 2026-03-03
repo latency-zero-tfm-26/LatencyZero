@@ -23,8 +23,6 @@ export class AuthService {
   username = computed(() => this._username());
 
   constructor() {
-    this.jwt.init();
-
     const isAuth = this.jwt.isAuthenticated();
     this._authStatus.set(isAuth ? 'authenticated' : 'not-authenticated');
 
@@ -33,23 +31,26 @@ export class AuthService {
     }
   }
 
-  login(username: string, password: string): Observable<boolean> {
-    return this.http
-      .post(LOGIN_ENDPOINT, { username, password }, { responseType: 'text', withCredentials: true })
-      .pipe(
-        map((token: string) => {
-          this.jwt.setToken(token);
-          this._authStatus.set('authenticated');
-          this._username.set(username);
-          return true;
-        }),
-        catchError((error) => {
-          this._authStatus.set('not-authenticated');
-          return of(false);
-        }),
-      );
-  }
-
+login(username: string, password: string): Observable<boolean> {
+  return this.http
+    .post<{ username: string; token: string; role: string }>(
+      LOGIN_ENDPOINT,
+      { username, password },
+      { withCredentials: true }
+    )
+    .pipe(
+      map((response) => {
+        this.jwt.setSession(response);
+        this._authStatus.set('authenticated');
+        this._username.set(response.username);
+        return true;
+      }),
+      catchError(() => {
+        this._authStatus.set('not-authenticated');
+        return of(false);
+      }),
+    );
+}
   register(registerDTO: RegisterDTO): Observable<boolean> {
     return this.http.post<{ created: boolean }>(REGISTER_ENDPOINT, registerDTO).pipe(
       map((response) => {

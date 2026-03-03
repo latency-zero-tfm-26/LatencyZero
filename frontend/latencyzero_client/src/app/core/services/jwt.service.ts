@@ -1,47 +1,66 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { JwtPayload, jwtDecode } from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode';
+
+interface SessionData {
+  username: string;
+  token: string;
+  role: string;
+}
 
 @Injectable({ providedIn: 'root' })
 export class JwtService {
-  private readonly TOKEN_KEY = 'token';
+
+  private readonly TOKEN_KEY = 'auth_session';
+
   private tokenSubject = new BehaviorSubject<string | null>(null);
   public token$ = this.tokenSubject.asObservable();
 
   private role: string | null = null;
   private name: string | null = null;
-  private id: number | null = null;
 
   constructor() {
     this.init();
   }
 
-  init() {
+  public init(): void {
     const stored = localStorage.getItem(this.TOKEN_KEY);
+
     if (!stored) {
       this.clear();
       return;
     }
 
     try {
-      const data = JSON.parse(stored);
-      const token = data.token;
+      const data: SessionData = JSON.parse(stored);
 
-      if (token && this.validateToken(token)) {
-        this.tokenSubject.next(token);
-        this.role = data.role ?? null;
-        this.name = data.username ?? null;
+      if (this.validateToken(data.token)) {
+        this.tokenSubject.next(data.token);
+        this.role = data.role;
+        this.name = data.username;
       } else {
         this.clear();
       }
     } catch {
       this.clear();
     }
+
+    console.log('INIT ROLE:', this.role);
+  }
+
+  public setSession(data: SessionData): void {
+    localStorage.setItem(this.TOKEN_KEY, JSON.stringify(data));
+
+    this.tokenSubject.next(data.token);
+    this.role = data.role;
+    this.name = data.username;
+
+    console.log('LOGIN ROLE:', this.role);
   }
 
   private validateToken(token: string): boolean {
     try {
-      const decoded: any = jwtDecode<JwtPayload>(token);
+      const decoded: any = jwtDecode(token);
       const now = Math.floor(Date.now() / 1000);
       return decoded.exp ? decoded.exp > now : false;
     } catch {
@@ -49,73 +68,30 @@ export class JwtService {
     }
   }
 
-  private decodeToken(token: string) {
-    try {
-      const decoded: any = jwtDecode<JwtPayload>(token);
-      this.role = decoded.role || null;
-      this.name = decoded.name || null;
-      this.id = decoded.id || null;
-    } catch (e) {
-      this.clear();
-    }
-  }
-
-  public setToken(token: string): void {
-    let decoded: any;
-    try {
-      decoded = jwtDecode<JwtPayload>(token);
-      this.role = decoded.role || null;
-      this.name = decoded.name || null;
-      this.id = decoded.id || null;
-    } catch {
-      this.clear();
-      return;
-    }
-
-    if (this.role === 'admin') {
-      this.tokenSubject.next(token);
-    } else {
-      localStorage.setItem(this.TOKEN_KEY, token);
-      this.tokenSubject.next(token);
-    }
-  }
-
   public clear(): void {
     localStorage.removeItem(this.TOKEN_KEY);
     this.tokenSubject.next(null);
-    this.role = this.name = null;
-    this.id = null;
+    this.role = null;
+    this.name = null;
   }
 
   public getToken(): string | null {
     return this.tokenSubject.value;
   }
 
-  public isAuthenticated(): boolean {
-    const token = this.getToken();
-    return token ? this.validateToken(token) : false;
-  }
-
   public getRole(): string | null {
     return this.role;
   }
+
   public getName(): string | null {
     return this.name;
   }
-  public getId(): number | null {
-    return this.id;
+
+  public isAuthenticated(): boolean {
+    return !!this.getToken();
   }
 
   public hasRole(role: string): boolean {
     return this.role === role;
-  }
-
-  public getJwt(): string | null {
-    try {
-      const data = JSON.parse(localStorage.getItem(this.TOKEN_KEY) || 'null');
-      return data?.token || null;
-    } catch {
-      return null;
-    }
   }
 }
