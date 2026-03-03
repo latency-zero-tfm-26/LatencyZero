@@ -2,6 +2,24 @@
   width: 260px;
 }
 
+/* ── Scrollbar ── */
+.scrollbar-thin::-webkit-scrollbar {
+  width: 4px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background: rgb(51 65 85 / 0.7); /* slate-700/70 */
+  border-radius: 9999px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb:hover {
+  background: rgb(234 179 8 / 0.35); /* yellow-500/35 */
+}
+
 .agent-sidebar.sidebar-closed {
   width: 60px;
 }
