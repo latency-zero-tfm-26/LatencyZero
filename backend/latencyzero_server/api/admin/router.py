@@ -4,7 +4,7 @@ from sqlalchemy.orm import Session
 from typing import List
 
 from ...db.session import get_db
-from ...services.admin_service import get_all_users, toggle_user_role_service
+from ...services.admin_service import ban_user_service, get_all_users, toggle_user_role_service
 from ...schemas.user import UserAdminDTO
 from ...services.auth_service import decode_token
 from ...models.user import User
@@ -58,6 +58,39 @@ def toggle_user_role(
 
     try:
         target_user = toggle_user_role_service(db, user_id, current_user)
+    except PermissionError as e:
+        raise HTTPException(status_code=403, detail=str(e))
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    except LookupError as e:
+        raise HTTPException(status_code=404, detail=str(e))
+
+    return target_user
+
+
+@router.patch("/users/{user_id}/ban", response_model=UserAdminDTO)
+def ban_user(
+    user_id: int,
+    credentials: HTTPAuthorizationCredentials = Depends(_bearer),
+    db: Session = Depends(get_db)
+):
+    """Ban a user: role='banned' and is_banned=True. Only admins can do this."""
+    token = credentials.credentials
+    try:
+        payload = decode_token(token)
+    except Exception as e:
+        raise HTTPException(status_code=401, detail=f"Invalid token: {str(e)}")
+
+    current_user_id = payload.get("sub")
+    if not current_user_id:
+        raise HTTPException(status_code=401, detail="Token missing 'sub'")
+
+    current_user = db.query(User).filter(User.id == int(current_user_id)).first()
+    if not current_user:
+        raise HTTPException(status_code=401, detail="User not found")
+
+    try:
+        target_user = ban_user_service(db, user_id, current_user)
     except PermissionError as e:
         raise HTTPException(status_code=403, detail=str(e))
     except ValueError as e:

@@ -44,8 +44,6 @@ export class JwtService {
     } catch {
       this.clear();
     }
-
-    console.log('INIT ROLE:', this.role);
   }
 
   public setSession(data: SessionData): void {
@@ -54,8 +52,6 @@ export class JwtService {
     this.tokenSubject.next(data.token);
     this.role = data.role;
     this.name = data.username;
-
-    console.log('LOGIN ROLE:', this.role);
   }
 
   private validateToken(token: string): boolean {

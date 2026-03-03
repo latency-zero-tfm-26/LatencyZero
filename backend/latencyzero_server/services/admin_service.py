@@ -26,3 +26,21 @@ def toggle_user_role_service(db: Session, target_user_id: int, current_user: Use
     db.refresh(target_user)
 
     return map_user_to_admin_dto(target_user)
+
+def ban_user_service(db: Session, target_user_id: int, current_user: User) -> UserAdminDTO:
+    if current_user.role != "admin":
+        raise PermissionError("Admin privileges required")
+
+    if current_user.id == target_user_id:
+        raise ValueError("Cannot ban yourself")
+
+    target_user = db.query(User).filter(User.id == target_user_id).first()
+    if not target_user:
+        raise LookupError("Target user not found")
+
+    target_user.role = "banned"
+    target_user.is_banned = True
+    db.commit()
+    db.refresh(target_user)
+
+    return map_user_to_admin_dto(target_user)
