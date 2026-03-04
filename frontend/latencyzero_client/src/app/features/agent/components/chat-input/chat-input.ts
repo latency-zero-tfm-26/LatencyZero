@@ -21,7 +21,7 @@ export class ChatInput {
   send(el: HTMLTextAreaElement): void {
     if (!this.newMessage.trim() && !this.file) return;
 
-    this.s.sendMessage(this.newMessage, this.file);
+    this.s.sendMessage(this.newMessage, this.file, this.filePreview);
 
     // Reset
     this.newMessage = '';

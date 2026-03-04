@@ -42,7 +42,7 @@
 }
 
 .scrollbar-thin::-webkit-scrollbar-thumb:hover {
-  background: rgb(71 85 105 / 0.9); /* slate-600/90 */
+  background: rgb(234 179 8 / 0.35); /* yellow-500/35 */
 }
 
 textarea {

@@ -7,6 +7,7 @@ export interface ChatMessage {
   id: string;
   role: 'user' | 'assistant';
   content: string;
+  imagePreview?: string;
   timestamp: Date;
 }
 
@@ -111,9 +112,10 @@ export class AgentService {
     }
   }
 
-  async sendMessage(content: string, userFile: File | null = null): Promise<void> {
+  async sendMessage(content: string, userFile: File | null = null, imagePreview: string | null = null): Promise<void> {
     const trimmed = content.trim();
-    if (!trimmed || this.isTyping()) return;
+    if (!trimmed && !userFile) return;
+    if (this.isTyping()) return;
 
     const chatId = this.currentChatId();
     if (!chatId) return;
@@ -130,6 +132,7 @@ export class AgentService {
                   id: crypto.randomUUID(),
                   role: 'user',
                   content: trimmed,
+                  imagePreview: imagePreview ?? undefined,
                   timestamp: new Date(),
                 },
               ],
