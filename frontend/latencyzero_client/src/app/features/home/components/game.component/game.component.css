@@ -1,0 +1,90 @@
+/* Tarjeta */
+.game-card {
+  flex-shrink: 0;
+  width: 9rem;
+  height: 12rem;
+  border-radius: 0.75rem;
+  border: 1px solid #444;
+  display: flex;
+  align-items: flex-end;
+  padding: 0.75rem;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Imagen dentro de la tarjeta */
+.game-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0.75rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/* Overlay para que el texto se vea sobre la imagen */
+.game-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+/* Título del juego */
+.game-title {
+  position: relative;
+  z-index: 1;
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  line-height: 1.2;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+  bottom: 0.5rem;
+  left: 0.5rem;
+  position: absolute;
+}
+
+
+/* Animaciones del carrusel */
+
+@keyframes scroll-right {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-33.333%); }
+}
+
+@keyframes scroll-left {
+  0%   { transform: translateX(-33.333%); }
+  100% { transform: translateX(0); }
+}
+
+.animate-scroll-right {
+  animation: scroll-right 35s linear infinite;
+  width: max-content;
+  display: flex;
+  gap: 0.75rem;
+}
+
+.animate-scroll-left {
+  animation: scroll-left 28s linear infinite;
+  width: max-content;
+  display: flex;
+  gap: 0.75rem;
+}
+
+.animate-scroll-right-slow {
+  animation: scroll-right 45s linear infinite;
+  width: max-content;
+  display: flex;
+  gap: 0.75rem;
+}
+
+/* Pausa al hover */
+section:hover .animate-scroll-right,
+section:hover .animate-scroll-left,
+section:hover .animate-scroll-right-slow {
+  animation-play-state: paused;
+}

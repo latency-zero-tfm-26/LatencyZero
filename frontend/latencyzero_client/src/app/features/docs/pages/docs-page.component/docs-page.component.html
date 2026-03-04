@@ -1,153 +1,135 @@
 <main class="relative z-10 flex-1 container mx-auto px-6 py-20 flex flex-col gap-24">
-  <!-- HEADER -->
   <header class="text-center max-w-4xl mx-auto">
     <h1 class="text-5xl sm:text-6xl font-extrabold tracking-tight text-yellow-500 mb-6">
       Documentación de LatencyZero
     </h1>
     <p class="text-slate-400 text-lg sm:text-xl leading-relaxed">
-      Guía completa sobre los componentes esenciales de un PC moderno. Entiende cómo funciona cada
-      pieza y cómo influye en el rendimiento general del sistema.
+      Guía técnica detallada sobre los componentes esenciales de un equipo informático moderno. Comprende la arquitectura interna, la función de cada módulo y su impacto directo en el rendimiento global del sistema.
     </p>
   </header>
 
-  <!-- INTRO -->
   <section
     class="max-w-5xl mx-auto bg-slate-900/60 backdrop-blur-md border border-slate-800 rounded-2xl p-10 shadow-2xl"
   >
     <p class="text-slate-300 text-lg leading-relaxed">
-      Un ordenador es un ecosistema de componentes que trabajan en conjunto. Un buen equilibrio
-      entre ellos evita cuellos de botella y maximiza el rendimiento, ya sea para gaming, creación
-      de contenido o productividad.
+      Un PC es un ecosistema de hardware interconectado. Garantizar una sinergia adecuada entre sus componentes es fundamental para mitigar cuellos de botella (<i>bottlenecks</i>) y maximizar la eficiencia computacional, tanto en entornos de alto rendimiento (gaming), como en estaciones de trabajo y productividad profesional.
     </p>
   </section>
 
-  <!-- COMPONENTES -->
   <section class="grid md:grid-cols-2 xl:grid-cols-3 gap-12">
-    <!-- CPU -->
     <div
       class="bg-slate-800/70 backdrop-blur p-8 rounded-2xl shadow-xl hover:scale-[1.02] transition duration-300"
     >
       <h2 class="text-2xl font-bold text-yellow-400 mb-4">CPU (Procesador)</h2>
       <p class="text-slate-300 mb-4 leading-relaxed">
-        Es el cerebro del ordenador. Ejecuta instrucciones y coordina todas las operaciones del
-        sistema.
+        Unidad Central de Procesamiento. Actúa como el núcleo lógico del sistema, encargado de interpretar y ejecutar las instrucciones del software.
       </p>
       <ul class="list-disc list-inside text-slate-400 text-sm space-y-2 marker:text-yellow-400">
-        <li>Determina la capacidad de multitarea</li>
-        <li>La frecuencia (GHz) impacta en la velocidad</li>
-        <li>Más núcleos e hilos mejoran cargas pesadas</li>
-        <li>Clave en gaming competitivo y software profesional</li>
+        <li>Determina la capacidad de procesamiento en paralelo.</li>
+        <li>La frecuencia de reloj (GHz) define la velocidad por ciclo.</li>
+        <li>Más núcleos (Cores) e hilos (Threads) optimizan cargas pesadas.</li>
+        <li>Crítico en gaming de altos FPS y compilación de software.</li>
       </ul>
     </div>
 
-    <!-- GPU -->
     <div
       class="bg-slate-800/70 backdrop-blur p-8 rounded-2xl shadow-xl hover:scale-[1.02] transition duration-300"
     >
       <h2 class="text-2xl font-bold text-yellow-400 mb-4">GPU (Tarjeta Gráfica)</h2>
       <p class="text-slate-300 mb-4 leading-relaxed">
-        Encargada del procesamiento gráfico y cálculos paralelos complejos.
+        Unidad de Procesamiento Gráfico. Especializada en la aceleración por hardware para el renderizado de imágenes y cálculos matriciales.
       </p>
       <ul class="list-disc list-inside text-slate-400 text-sm space-y-2 marker:text-yellow-400">
-        <li>Fundamental para videojuegos modernos</li>
-        <li>Importante en edición de vídeo y renderizado 3D</li>
-        <li>La VRAM influye en texturas y resolución</li>
-        <li>Soporta tecnologías como Ray Tracing</li>
+        <li>Indispensable para motores gráficos y renderizado 3D.</li>
+        <li>Fundamental en flujos de Machine Learning e IA.</li>
+        <li>La VRAM dicta la capacidad para cargar texturas de alta resolución.</li>
+        <li>Habilita tecnologías como Ray Tracing y escalado por IA (DLSS/FSR).</li>
       </ul>
     </div>
 
-    <!-- RAM -->
     <div
       class="bg-slate-800/70 backdrop-blur p-8 rounded-2xl shadow-xl hover:scale-[1.02] transition duration-300"
     >
       <h2 class="text-2xl font-bold text-yellow-400 mb-4">RAM (Memoria)</h2>
       <p class="text-slate-300 mb-4 leading-relaxed">
-        Memoria temporal donde se almacenan datos en uso para acceso rápido.
+        Memoria de Acceso Aleatorio. Proporciona almacenamiento volátil de ultra-alta velocidad para las instrucciones inminentes de la CPU.
       </p>
       <ul class="list-disc list-inside text-slate-400 text-sm space-y-2 marker:text-yellow-400">
-        <li>16GB es el estándar actual para gaming</li>
-        <li>Velocidad (MHz) mejora rendimiento general</li>
-        <li>Dual Channel aumenta eficiencia</li>
-        <li>Influye en multitarea intensiva</li>
+        <li>16GB/32GB constituyen el estándar para entornos exigentes.</li>
+        <li>La frecuencia (MT/s) y latencia (CL) dictan el ancho de banda.</li>
+        <li>Las topologías Dual/Quad Channel duplican el rendimiento efectivo.</li>
+        <li>Previene el uso de la paginación del disco (evitando <i>stuttering</i>).</li>
       </ul>
     </div>
 
-    <!-- Almacenamiento -->
     <div
       class="bg-slate-800/70 backdrop-blur p-8 rounded-2xl shadow-xl hover:scale-[1.02] transition duration-300"
     >
       <h2 class="text-2xl font-bold text-yellow-400 mb-4">Almacenamiento</h2>
       <p class="text-slate-300 mb-4 leading-relaxed">
-        Guarda el sistema operativo, programas y archivos personales.
+        Unidades de memoria no volátil destinadas a la retención de datos a largo plazo (SO, software y bases de datos).
       </p>
       <ul class="list-disc list-inside text-slate-400 text-sm space-y-2 marker:text-yellow-400">
-        <li>SSD NVMe ofrece máxima velocidad</li>
-        <li>HDD es más económico para grandes volúmenes</li>
-        <li>Reduce tiempos de carga en juegos</li>
-        <li>Impacta en arranque del sistema</li>
+        <li>Los SSD NVMe (PCIe) ofrecen máximas tasas de lectura/escritura.</li>
+        <li>Los HDD mecánicos quedan relegados al almacenamiento masivo frío.</li>
+        <li>Reduce drásticamente la latencia en la carga de <i>assets</i>.</li>
+        <li>Minimiza los tiempos de arranque (<i>Boot</i>) y respuesta del sistema.</li>
       </ul>
     </div>
 
-    <!-- Placa Base -->
     <div
       class="bg-slate-800/70 backdrop-blur p-8 rounded-2xl shadow-xl hover:scale-[1.02] transition duration-300"
     >
       <h2 class="text-2xl font-bold text-yellow-400 mb-4">Placa Base (Motherboard)</h2>
       <p class="text-slate-300 mb-4 leading-relaxed">
-        Es el componente que conecta y permite la comunicación entre todos los dispositivos.
+        Circuito impreso principal que actúa como columna vertebral, administrando el bus de datos y la energía de los componentes.
       </p>
       <ul class="list-disc list-inside text-slate-400 text-sm space-y-2 marker:text-yellow-400">
-        <li>Determina compatibilidad de CPU y RAM</li>
-        <li>Define capacidad de expansión</li>
-        <li>Incluye puertos y conectividad</li>
-        <li>El chipset habilita funciones avanzadas</li>
+        <li>El socket y el chipset determinan la compatibilidad de CPU.</li>
+        <li>Define la escalabilidad futura (líneas PCIe, ranuras M.2).</li>
+        <li>Gestiona la topología de red (Wi-Fi, LAN) y la interfaz I/O.</li>
+        <li>El VRM es crucial para la estabilidad y el <i>overclocking</i>.</li>
       </ul>
     </div>
 
-    <!-- PSU -->
     <div
       class="bg-slate-800/70 backdrop-blur p-8 rounded-2xl shadow-xl hover:scale-[1.02] transition duration-300"
     >
       <h2 class="text-2xl font-bold text-yellow-400 mb-4">Fuente de Poder (PSU)</h2>
       <p class="text-slate-300 mb-4 leading-relaxed">
-        Suministra energía estable y protege los componentes.
+        Convierte la corriente alterna (AC) en corriente continua (DC) regulada a los distintos voltajes requeridos.
       </p>
       <ul class="list-disc list-inside text-slate-400 text-sm space-y-2 marker:text-yellow-400">
-        <li>Certificación 80+ mejora eficiencia</li>
-        <li>Potencia adecuada evita inestabilidad</li>
-        <li>Protección contra picos eléctricos</li>
-        <li>Clave para sistemas de alto rendimiento</li>
+        <li>Certificaciones 80+ garantizan la eficiencia de conversión.</li>
+        <li>Un dimensionamiento en W correcto previene apagones bajo estrés.</li>
+        <li>Integra protecciones activas (OVP, SCP, OPP).</li>
+        <li>Pilar fundamental para la seguridad y longevidad del hardware.</li>
       </ul>
     </div>
   </section>
 
-  <!-- SECCIÓN FINAL -->
   <section class="text-center max-w-4xl mx-auto">
     <h2 class="text-3xl font-bold text-yellow-500 mb-6">Optimización y equilibrio del sistema</h2>
     <p class="text-slate-300 text-lg leading-relaxed">
-      Un sistema equilibrado rinde mejor que uno con un único componente potente. Identificar
-      posibles cuellos de botella y elegir componentes compatibles es esencial para obtener el
-      máximo rendimiento.
+      Un sistema con una arquitectura equilibrada supera sistemáticamente a configuraciones descompensadas. Identificar y mitigar los cuellos de botella (por ejemplo, emparejar una GPU entusiasta con una CPU de entrada) es esencial para maximizar el rendimiento efectivo y el retorno de inversión (ROI).
     </p>
   </section>
-  <!-- SECCIÓN: Cómo leer un procesador -->
+  
   <section class="flex flex-col gap-16">
     <div class="text-center max-w-4xl mx-auto">
       <h2 class="text-4xl font-bold text-yellow-500 mb-6">
-        ¿Cómo entender el nombre de un procesador?
+        ¿Cómo interpretar la nomenclatura de una CPU?
       </h2>
       <p class="text-slate-300 text-lg leading-relaxed">
-        Los nombres de los procesadores contienen información clave sobre su generación, rendimiento
-        y características especiales. Saber interpretarlos te ayuda a elegir mejor.
+        Las designaciones alfanuméricas de los procesadores contienen metadatos precisos sobre su arquitectura, segmento de rendimiento y características exclusivas. Dominar esta lectura previene errores críticos de compatibilidad.
       </p>
     </div>
 
     <div class="grid lg:grid-cols-2 gap-12">
-      <!-- INTEL -->
       <div
         class="bg-slate-900/60 backdrop-blur-md border border-slate-800 rounded-2xl p-10 shadow-2xl"
       >
-        <h3 class="text-3xl font-bold text-yellow-400 mb-6">Procesadores Intel</h3>
+        <h3 class="text-3xl font-bold text-yellow-400 mb-6">Arquitectura Intel</h3>
 
         <p class="text-slate-300 mb-6 leading-relaxed">
           Ejemplo: <span class="text-yellow-400 font-semibold">Intel Core i5-12600KF</span>
@@ -157,29 +139,28 @@
           class="list-disc list-inside text-slate-400 space-y-3 marker:text-yellow-400 text-sm leading-relaxed"
         >
           <li>
-            <strong>i5</strong> → Gama del procesador (i3 entrada, i5 media, i7 alta, i9 entusiasta)
+            <strong>i5</strong> → Segmento de mercado (i3 Entrada, i5 Mainstream, i7 Alto rendimiento, i9 Entusiasta).
           </li>
-          <li><strong>12</strong> → Generación (12ª generación)</li>
-          <li><strong>600</strong> → Nivel de rendimiento dentro de la gama</li>
-          <li><strong>K</strong> → Permite overclock</li>
-          <li><strong>F</strong> → No incluye gráficos integrados</li>
+          <li><strong>12</strong> → Generación arquitectónica.</li>
+          <li><strong>600</strong> → SKU / Nivel de rendimiento dentro de la familia.</li>
+          <li><strong>K</strong> → Multiplicador desbloqueado (Apto para Overclocking).</li>
+          <li><strong>F</strong> → Ausencia de iGPU (Requiere estrictamente tarjeta gráfica dedicada).</li>
         </ul>
 
         <div class="mt-6 text-slate-300 text-sm leading-relaxed">
-          <p><span class="text-yellow-400 font-semibold">Otras letras comunes:</span></p>
+          <p><span class="text-yellow-400 font-semibold">Sufijos orientados a movilidad/eficiencia:</span></p>
           <ul class="list-disc list-inside text-slate-400 space-y-2 marker:text-yellow-400 mt-2">
-            <li><strong>H</strong> → Alto rendimiento en portátiles</li>
-            <li><strong>U</strong> → Bajo consumo (ultrabooks)</li>
-            <li><strong>T</strong> → Bajo consumo en sobremesa</li>
+            <li><strong>H</strong> → Alto TDP orientado a portátiles de rendimiento.</li>
+            <li><strong>U</strong> → Voltaje ultra bajo (ULV) enfocado en eficiencia térmica.</li>
+            <li><strong>T</strong> → TDP restringido térmicamente para equipos compactos.</li>
           </ul>
         </div>
       </div>
 
-      <!-- AMD -->
       <div
         class="bg-slate-900/60 backdrop-blur-md border border-slate-800 rounded-2xl p-10 shadow-2xl"
       >
-        <h3 class="text-3xl font-bold text-yellow-400 mb-6">Procesadores AMD</h3>
+        <h3 class="text-3xl font-bold text-yellow-400 mb-6">Arquitectura AMD</h3>
 
         <p class="text-slate-300 mb-6 leading-relaxed">
           Ejemplo: <span class="text-yellow-400 font-semibold">Ryzen 5 7600X</span>
@@ -188,100 +169,92 @@
         <ul
           class="list-disc list-inside text-slate-400 space-y-3 marker:text-yellow-400 text-sm leading-relaxed"
         >
-          <li><strong>Ryzen 5</strong> → Gama (3 básica, 5 media, 7 alta, 9 entusiasta)</li>
-          <li><strong>7</strong> → Generación (serie 7000)</li>
-          <li><strong>600</strong> → Nivel dentro de la gama</li>
-          <li><strong>X</strong> → Mayor frecuencia y rendimiento</li>
+          <li><strong>Ryzen 5</strong> → Familia de producto (3 Entrada, 5 Mainstream, 7 Alto rendimiento, 9 Entusiasta).</li>
+          <li><strong>7</strong> → Serie / Generación arquitectónica (ej. Zen 4).</li>
+          <li><strong>600</strong> → Identificador de rendimiento relativo.</li>
+          <li><strong>X</strong> → Frecuencias de reloj extendidas de fábrica (eXtended frequency).</li>
         </ul>
 
         <div class="mt-6 text-slate-300 text-sm leading-relaxed">
-          <p><span class="text-yellow-400 font-semibold">Otras letras comunes:</span></p>
+          <p><span class="text-yellow-400 font-semibold">Sufijos especiales:</span></p>
           <ul class="list-disc list-inside text-slate-400 space-y-2 marker:text-yellow-400 mt-2">
-            <li><strong>G</strong> → Incluye gráficos integrados</li>
-            <li><strong>X3D</strong> → Caché 3D extra (mejor rendimiento en gaming)</li>
-            <li><strong>U</strong> → Bajo consumo en portátiles</li>
+            <li><strong>G</strong> → APU con gráficos integrados (Radeon Graphics).</li>
+            <li><strong>X3D</strong> → Incorpora tecnología 3D V-Cache (Optimización masiva para gaming).</li>
+            <li><strong>U</strong> → SKUs de bajo consumo para plataformas móviles.</li>
           </ul>
         </div>
       </div>
     </div>
 
-    <!-- CONCLUSIÓN -->
     <div class="max-w-4xl mx-auto text-center">
       <p class="text-slate-300 text-lg leading-relaxed">
-        Entender la nomenclatura evita errores comunes como comprar una CPU sin gráficos integrados
-        cuando no tienes tarjeta gráfica dedicada, o elegir una generación antigua pensando que es
-        más potente. La generación suele ser más importante que la gama en muchos casos.
+        Comprender la nomenclatura mitiga fallos estructurales de ensamblaje (como adquirir una CPU "F" careciendo de GPU dedicada). Además, establece un principio técnico clave: la modernidad de la arquitectura (Generación) impacta en el rendimiento con mayor severidad que el segmento de mercado (Gama) de arquitecturas obsoletas.
       </p>
     </div>
   </section>
-  <!-- SECCIÓN: Recomendaciones realistas por tipo de usuario -->
+  
   <section class="flex flex-col gap-16">
     <div class="text-center max-w-4xl mx-auto">
       <h2 class="text-4xl font-bold text-yellow-500 mb-6">
-        Recomendaciones según tu tipo de usuario
+        Perfiles Arquitectónicos de Usuario
       </h2>
       <p class="text-slate-300 text-lg leading-relaxed">
-        No todos los usuarios necesitan la misma potencia. Aquí te mostramos qué PC conviene según
-        tu uso real.
+        El sobredimensionamiento de hardware es un error frecuente. A continuación, se definen los estándares de configuración recomendados en base a cargas de trabajo empíricas.
       </p>
     </div>
 
     <div class="grid md:grid-cols-3 gap-12">
-      <!-- USUARIO BÁSICO / ESTUDIANTE -->
       <div
         class="bg-slate-900/60 backdrop-blur-md border border-slate-800 rounded-2xl p-8 shadow-2xl hover:scale-[1.02] transition duration-300"
       >
-        <h3 class="text-2xl font-bold text-yellow-400 mb-4">💻 Navegación / Estudiante</h3>
+        <h3 class="text-2xl font-bold text-yellow-400 mb-4">💻 Ofimática y Navegación</h3>
         <ul
           class="list-disc list-inside text-slate-400 space-y-3 marker:text-yellow-400 text-sm leading-relaxed"
         >
-          <li><strong>CPU:</strong> Intel Core i3 / Ryzen 3 o superior</li>
-          <li><strong>GPU:</strong> Integrada (Intel UHD / Radeon Vega)</li>
-          <li><strong>RAM:</strong> 8-16GB DDR4</li>
-          <li><strong>Almacenamiento:</strong> SSD 256-512GB para velocidad y documentos</li>
+          <li><strong>CPU:</strong> Intel Core i3 / Ryzen 3 (Arquitecturas recientes).</li>
+          <li><strong>GPU:</strong> Procesamiento de gráficos integrado (iGPU).</li>
+          <li><strong>RAM:</strong> 16GB DDR4 para garantizar fluidez en entornos web pesados.</li>
+          <li><strong>Almacenamiento:</strong> SSD NVMe 500GB para máxima agilidad del SO.</li>
           <li>
-            <strong>Extras:</strong> Ideal para navegación, vídeos, Office y programación ligera
+            <strong>Despliegue:</strong> Ideal para consumo multimedia, teletrabajo ligero y ofimática estándar.
           </li>
         </ul>
       </div>
 
-      <!-- GAMING / ENTRETAINMENT -->
       <div
         class="bg-slate-900/60 backdrop-blur-md border border-slate-800 rounded-2xl p-8 shadow-2xl hover:scale-[1.02] transition duration-300"
       >
-        <h3 class="text-2xl font-bold text-yellow-400 mb-4">🎮 Gaming / Entretenimiento</h3>
+        <h3 class="text-2xl font-bold text-yellow-400 mb-4">🎮 Gaming y Creadores</h3>
         <ul
           class="list-disc list-inside text-slate-400 space-y-3 marker:text-yellow-400 text-sm leading-relaxed"
         >
-          <li><strong>CPU:</strong> Intel Core i5 / Ryzen 5 (6-8 núcleos)</li>
-          <li><strong>GPU:</strong> NVIDIA RTX 3060 / AMD RX 6600 o superior</li>
-          <li><strong>RAM:</strong> 16-32GB DDR4/DDR5</li>
-          <li><strong>Almacenamiento:</strong> SSD NVMe 512GB+ para juegos y programas</li>
+          <li><strong>CPU:</strong> Intel Core i5 / Ryzen 5 (Mínimo 6 núcleos físicos).</li>
+          <li><strong>GPU:</strong> Tarjeta dedicada de gama media-alta (ej. RTX Serie 40 / RX Serie 7000).</li>
+          <li><strong>RAM:</strong> 16GB - 32GB DDR4/DDR5 en Dual Channel.</li>
+          <li><strong>Almacenamiento:</strong> SSD NVMe 1TB+ (Los títulos modernos demandan alta E/S).</li>
           <li>
-            <strong>Extras:</strong> Buen monitor, teclado y refrigeración para sesiones largas
+            <strong>Despliegue:</strong> Orientado a videojuegos AAA a 1080p/1440p y edición de vídeo inicial.
           </li>
         </ul>
       </div>
 
-      <!-- TRABAJO PROFESIONAL / MULTITAREA -->
       <div
         class="bg-slate-900/60 backdrop-blur-md border border-slate-800 rounded-2xl p-8 shadow-2xl hover:scale-[1.02] transition duration-300"
       >
-        <h3 class="text-2xl font-bold text-yellow-400 mb-4">💼 Trabajo / Desarrollo</h3>
+        <h3 class="text-2xl font-bold text-yellow-400 mb-4">💼 Workstation y Desarrollo</h3>
         <ul
           class="list-disc list-inside text-slate-400 space-y-3 marker:text-yellow-400 text-sm leading-relaxed"
         >
-          <li><strong>CPU:</strong> Intel Core i5/i7 recientes / Ryzen 5/7</li>
+          <li><strong>CPU:</strong> Intel Core i7/i9 o Ryzen 7/9 (Priorizando el conteo de hilos).</li>
           <li>
-            <strong>GPU:</strong> Integrada suficiente para desarrollo; dedicada opcional si
-            trabajas con ML o diseño
+            <strong>GPU:</strong> Dependiente de la carga; GPUs con alta VRAM si se entrenan modelos de ML.
           </li>
-          <li><strong>RAM:</strong> 32GB recomendado, ECC si se requiere estabilidad</li>
+          <li><strong>RAM:</strong> 32GB - 64GB (Considerar ECC en infraestructuras críticas).</li>
           <li>
-            <strong>Almacenamiento:</strong> SSD NVMe 1TB mínimo para proyectos y máquinas virtuales
+            <strong>Almacenamiento:</strong> Arreglos SSD NVMe PCIe Gen 4/5 de 2TB+ para contenedores Docker o BBDD.
           </li>
           <li>
-            <strong>Extras:</strong> Buen monitor, docking station y respaldo en la nube o NAS
+            <strong>Despliegue:</strong> Computación intensiva, virtualización, Machine Learning e ingeniería.
           </li>
         </ul>
       </div>
@@ -289,11 +262,10 @@
 
     <div class="max-w-4xl mx-auto text-center mt-6 flex flex-col gap-4">
       <p class="text-slate-300 text-lg leading-relaxed">
-        Estas recomendaciones están pensadas para cubrir un % de usuarios reales. Siempre considera
-        tus necesidades concretas y presupuesto.
+        Estas métricas representan líneas base (<i>baselines</i>) arquitectónicas aplicables a la mayoría de los despliegues.
       </p>
       <p class="text-slate-300 text-lg leading-relaxed">
-        Un PC equilibrado rinde mejor que uno con un solo componente potente.
+        Es imperativo auditar los requerimientos específicos de tu software o entorno antes de la adquisición y ensamblaje final.
       </p>
     </div>
   </section>

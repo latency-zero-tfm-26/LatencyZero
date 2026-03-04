@@ -21,3 +21,6 @@ class UserRepository(BaseRepository[User]):
   def create_user(self, username: str, email: str, hashed_password: str) -> User:
     user = User(username=username, email=email.lower(), password=hashed_password)
     return self.create(user)
+
+  def get_users(self) -> list[User]:
+    return self.db.query(User).all()

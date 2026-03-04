@@ -1,0 +1,80 @@
+<div class="p-6 text-slate-100 flex flex-col h-full">
+  <h1 class="text-2xl font-bold mb-6 flex-shrink-0">Gestión de Usuarios</h1>
+
+  <!-- Contenedor scrollable -->
+  <div class="flex-1 overflow-auto">
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+
+      <div
+        *ngFor="let user of users$ | async; trackBy: trackById"
+        class="bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-lg hover:border-yellow-500/30 transition-colors duration-300"
+      >
+        <!-- Header -->
+        <div class="flex items-center justify-between mb-4">
+          <div class="flex items-center gap-3">
+            <!-- Inicial del usuario -->
+            <div
+              class="w-10 h-10 rounded-full bg-yellow-500 flex items-center justify-center text-slate-950 font-bold border-2 border-slate-700 shadow-md"
+            >
+              {{ user.username.charAt(0).toUpperCase() }}
+            </div>
+
+            <div>
+              <h2 class="font-semibold text-lg">{{ user.username }}</h2>
+              <p class="text-sm text-slate-400">{{ user.email }}</p>
+            </div>
+          </div>
+
+          <!-- Role badge -->
+          <span
+            class="text-xs px-2.5 py-1 rounded-md font-medium transition-colors"
+            [ngClass]="{
+              'bg-slate-700 text-slate-300': user.role === 'user',
+              'bg-yellow-500/10 text-yellow-400 border border-yellow-500/30': user.role === 'admin',
+              'bg-red-500/10 text-red-400 border border-red-500/30': user.role === 'banned'
+            }"
+          >
+            {{ user.role }}
+          </span>
+        </div>
+
+        <!-- Created at -->
+        <p class="text-xs text-slate-500 mb-4">
+          Creado: {{ user.create_at | date:'medium' }}
+        </p>
+
+        <!-- Actions -->
+        <div class="flex gap-2">
+
+          <!-- Toggle Role (solo si no está banned y no es tu usuario) -->
+          <button
+            *ngIf="user.role !== 'banned' && !isCurrentUser(user)"
+            (click)="toggleRole(user)"
+            class="flex-1 text-xs font-medium px-3 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 transition-colors duration-200"
+          >
+            {{ user.role === 'admin' ? 'Convertir en User' : 'Convertir en Admin' }}
+          </button>
+
+          <!-- Ban / Unban (solo si no es tu usuario) -->
+          <button
+            *ngIf="user.role === 'user' && !isCurrentUser(user)"
+            (click)="banOrUnban(user)"
+            class="text-xs font-medium px-3 py-2 rounded-lg bg-red-600 hover:bg-red-500 transition-colors duration-200"
+          >
+            Banear
+          </button>
+
+          <button
+            *ngIf="user.role === 'banned' && !isCurrentUser(user)"
+            (click)="banOrUnban(user)"
+            class="flex-1 text-xs font-medium px-3 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-500 transition-colors duration-200"
+          >
+            Desbanear
+          </button>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

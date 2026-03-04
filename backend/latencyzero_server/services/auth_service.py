@@ -1,4 +1,5 @@
 from datetime import timedelta
+from fastapi import HTTPException
 from sqlalchemy.orm import Session
 
 from ..core.config import settings
@@ -21,6 +22,9 @@ def authenticate_user(db: Session, identifier: str, password: str) -> User:
 
   if not user or not verify_password(password, user.password):
     raise InvalidCredentialsException()
+  
+  if user.is_banned:
+    raise HTTPException(status_code=403, detail="User is banned")
 
   return user
 

@@ -34,4 +34,8 @@ export class NavbarMobileMenuComponent {
     this.close();
     this.authService.logout();
   }
+
+    isAdmin(): boolean {
+    return this.jwtService.getRole() === "admin";
+  }
 }

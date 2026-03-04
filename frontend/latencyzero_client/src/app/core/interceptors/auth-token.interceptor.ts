@@ -5,7 +5,7 @@ import { JwtService } from '../services/jwt.service';
 export function authTokenInterceptor(req: HttpRequest<unknown>, next: HttpHandlerFn) {
   const jwtService = inject(JwtService);
 
-  const token = jwtService.getJwt();
+  const token = jwtService.getToken();
   const isPublic = req.url.includes('/api/auth');
 
   if (isPublic) return next(req);

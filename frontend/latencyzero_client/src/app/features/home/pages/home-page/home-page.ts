@@ -1,8 +1,12 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { GameComponent } from '../../components/game.component/game.component';
+import { AboutUsComponent } from "../../components/about-us.component/about-us.component";
 
 @Component({
   selector: 'app-home-page',
-  imports: [],
+  imports: [RouterLink, CommonModule, GameComponent, AboutUsComponent],
   templateUrl: './home-page.html',
   styleUrl: './home-page.css',
 })

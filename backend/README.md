@@ -38,7 +38,7 @@ En el directorio `backend/`, crea un archivo llamado `.env` con el siguiente con
 
 ```env
 # Entorno
-ENV=development 
+ENV=development
 
 # Base de datos producción
 DATABASE_URL=
@@ -49,8 +49,13 @@ SECRET_KEY=
 # CORS
 CORS_ORIGINS=
 
-# Agente
+# LLM
 GROQ_API_KEY=
+
+# HUGGING FACE
+HF_TOKEN=
+
+# ZILLIZ CLOUD
 ZILLIZ_URI=
 ZILLIZ_TOKEN=
 ```

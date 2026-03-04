@@ -19,6 +19,7 @@ class Settings(BaseSettings):
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 60 * 24
     CORS_ORIGINS: list[str] = []
     GROQ_API_KEY: str
+    HF_TOKEN: str
     ZILLIZ_URI: str
     ZILLIZ_TOKEN: str
     DEBUG: bool = True
