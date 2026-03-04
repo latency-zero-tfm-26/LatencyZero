@@ -11,12 +11,16 @@ export const adminRoutes: Routes = [
     canActivate: [AdminGuard],
     children: [
       {
-        path: 'analysis-sentiment',
+        path: 'reviews',
         component: AnalysisSentimentPage,
       },
       {
         path: 'users',
         component: AdminUserPage,
+      },
+      {
+        path: '**',
+        redirectTo: 'reviews',
       },
     ],
   },
