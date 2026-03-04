@@ -21,6 +21,9 @@ def toggle_user_role_service(db: Session, target_user_id: int, current_user: Use
     if not target_user:
         raise LookupError("Target user not found")
 
+    if current_user.id == target_user_id:
+        raise ValueError("Cannot change your own role")
+
     target_user.role = "user" if target_user.role == "admin" else "admin"
     db.commit()
     db.refresh(target_user)
@@ -38,8 +41,14 @@ def ban_user_service(db: Session, target_user_id: int, current_user: User) -> Us
     if not target_user:
         raise LookupError("Target user not found")
 
-    target_user.role = "banned"
-    target_user.is_banned = True
+    # Toggle ban/unban
+    if target_user.role == "banned":
+        target_user.role = "user"
+        target_user.is_banned = False
+    else:
+        target_user.role = "banned"
+        target_user.is_banned = True
+
     db.commit()
     db.refresh(target_user)
 

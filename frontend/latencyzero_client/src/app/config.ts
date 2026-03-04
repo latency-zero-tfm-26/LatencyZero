@@ -19,3 +19,9 @@ export const GET_CHATS = `${BASE_URL}/chat/`; // {session_id}
 export const CREATE_SESSION = `${BASE_URL}/session/create`;
 export const GET_SESSIONS = `${BASE_URL}/session/sessions`;
 export const DELETE_SESSION = `${BASE_URL}/session/delete/`; // {session_id}
+
+// Admin endpoints
+export const GET_USERS = `${BASE_URL}/admin/users`;
+export const PATCH_USERS_ROLE = `${BASE_URL}/admin/users/toggle-role/`;  // {user_id}
+export const PATCH_USERS_BAN = `${BASE_URL}/admin/users/ban/`;  // {user_id}
+

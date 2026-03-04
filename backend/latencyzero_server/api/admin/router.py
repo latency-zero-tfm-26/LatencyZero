@@ -35,7 +35,7 @@ def fetch_all_users(
         raise HTTPException(status_code=401, detail="Invalid token")
     
 
-@router.patch("/users/{user_id}/toggle-role", response_model=UserAdminDTO)
+@router.patch("/users/toggle-role/{user_id}", response_model=UserAdminDTO)
 def toggle_user_role(
     user_id: int,
     credentials: HTTPAuthorizationCredentials = Depends(_bearer),
@@ -68,7 +68,7 @@ def toggle_user_role(
     return target_user
 
 
-@router.patch("/users/{user_id}/ban", response_model=UserAdminDTO)
+@router.patch("/users/ban/{user_id}", response_model=UserAdminDTO)
 def ban_user(
     user_id: int,
     credentials: HTTPAuthorizationCredentials = Depends(_bearer),
