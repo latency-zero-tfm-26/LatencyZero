@@ -1,0 +1,275 @@
+  <!-- Gaming Section -->
+  <section class="relative overflow-hidden rounded-3xl min-h-[420px] flex items-center">
+    <!-- CARRUSEL DE FONDO — filas que se mueven en direcciones opuestas -->
+    <div
+      class="absolute inset-0 flex flex-col gap-3 py-4 pointer-events-none select-none opacity-40"
+    >
+      <!-- Fila 1: izquierda → derecha -->
+      <div class="flex gap-3 animate-scroll-right">
+        <ng-container *ngTemplateOutlet="row1"></ng-container>
+        <ng-container *ngTemplateOutlet="row1"></ng-container>
+        <ng-container *ngTemplateOutlet="row1"></ng-container>
+      </div>
+
+      <!-- Fila 2: derecha → izquierda -->
+      <div class="flex gap-3 animate-scroll-left">
+        <ng-container *ngTemplateOutlet="row2"></ng-container>
+        <ng-container *ngTemplateOutlet="row2"></ng-container>
+        <ng-container *ngTemplateOutlet="row2"></ng-container>
+      </div>
+
+      <!-- Fila 3: izquierda → derecha más lento -->
+      <div class="flex gap-3 animate-scroll-right-slow">
+        <ng-container *ngTemplateOutlet="row3"></ng-container>
+        <ng-container *ngTemplateOutlet="row3"></ng-container>
+        <ng-container *ngTemplateOutlet="row3"></ng-container>
+      </div>
+    </div>
+
+    <!-- Overlay gradiente para que el texto sea legible -->
+    <div
+      class="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/85 to-slate-950/60"
+    ></div>
+    <div
+      class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-slate-950/80"
+    ></div>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <div class="relative z-10 px-8 sm:px-16 py-16 max-w-2xl">
+      <!-- Badge -->
+      <span
+        class="inline-flex items-center gap-2 bg-yellow-500/15 border border-yellow-500/30 text-yellow-400 text-xs font-semibold uppercase tracking-widest px-3 py-1.5 rounded-full mb-5"
+      >
+        <img src="assets/svg/sports_esports.svg" alt="play">
+        Gaming Intelligence
+      </span>
+
+      <!-- Título -->
+      <h2 class="text-4xl sm:text-5xl font-black text-white leading-tight mb-5 tracking-tight">
+        ¿Tu PC está listo para<br />
+        <span class="text-yellow-500">el siguiente nivel?</span>
+      </h2>
+
+      <!-- Descripción -->
+      <p class="text-slate-300 text-base sm:text-lg leading-relaxed mb-3">
+        Nuestro agente te ayuda con tu equipo actual y te dice exactamente
+        <span class="text-white font-semibold">qué juegos puedes mover</span> y a qué calidad.
+      </p>
+      <p class="text-slate-400 text-sm sm:text-base leading-relaxed mb-8">
+        ¿Quieres montar un PC para un juego en concreto? Cuéntaselo y te recomendará los componentes
+        perfectos para tu presupuesto.
+      </p>
+
+      <!-- CTAs -->
+      <div class="flex flex-wrap gap-3">
+        <a
+          routerLink="/agente"
+          class="inline-flex items-center gap-2 bg-yellow-500 hover:bg-yellow-400 text-slate-950 font-bold px-6 py-3 rounded-xl transition-all shadow-lg hover:scale-105 hover:shadow-yellow-500/25 text-sm"
+        >
+          <img src="assets/svg/smart_toy2.svg" alt="play">
+          Vamos a probarlo
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <ng-template #row1>
+    <div class="game-card border border-gray-700">
+      <img
+        src="assets/games/cyberpunk.webp"
+        alt="Cyberpunk 2077"
+        class="w-full h-full object-cover rounded-xl"
+      />
+      <span class="game-title">Cyberpunk 2077</span>
+    </div>
+    <div class="game-card border border-gray-700">
+      <img
+        src="assets/games/EldenRing.webp"
+        alt="Elden Ring"
+        class="w-full h-full object-cover rounded-xl"
+      />
+      <span class="game-title">Elden Ring</span>
+    </div>
+    <div class="game-card border border-gray-700">
+      <img
+        src="assets/games/thewitcher3.webp"
+        alt="The Witcher 3"
+        class="w-full h-full object-cover rounded-xl"
+      />
+      <span class="game-title">The Witcher 3</span>
+    </div>
+    <div class="game-card border border-gray-700">
+      <img
+        src="assets/games/BaldursGate3.webp"
+        alt="Baldur's Gate 3"
+        class="w-full h-full object-cover rounded-xl"
+      />
+      <span class="game-title">Baldur's Gate 3</span>
+    </div>
+    <div class="game-card border border-gray-700">
+      <img
+        src="assets/games/ReddeadII.webp"
+        alt="Red Dead 2"
+        class="w-full h-full object-cover rounded-xl"
+      />
+      <span class="game-title">Red Dead 2</span>
+    </div>
+    <div class="game-card border border-gray-700">
+      <img
+        src="assets/games/minecraft.webp"
+        alt="Minecraft"
+        class="w-full h-full object-cover rounded-xl"
+      />
+      <span class="game-title">Minecraft</span>
+    </div>
+    <div class="game-card border border-gray-700">
+      <img
+        src="assets/games/godofwar.webp"
+        alt="God of War"
+        class="w-full h-full object-cover rounded-xl"
+      />
+      <span class="game-title">God of War</span>
+    </div>
+    <div class="game-card border border-gray-700">
+      <img
+        src="assets/games/gta5.webp"
+        alt="GTA VI"
+        class="w-full h-full object-cover rounded-xl"
+      />
+      <span class="game-title">GTA VI</span>
+    </div>
+  </ng-template>
+
+  <ng-template #row2>
+    <div class="game-card border border-gray-700">
+      <img
+        src="assets/games/hogwartslegacy.webp"
+        alt="Hogwarts Legacy"
+        class="w-full h-full object-cover rounded-xl"
+      />
+      <span class="game-title">Hogwarts Legacy</span>
+    </div>
+    <div class="game-card border border-gray-700">
+      <img
+        src="assets/games/sekiro.webp"
+        alt="Sekiro"
+        class="w-full h-full object-cover rounded-xl"
+      />
+      <span class="game-title">Sekiro</span>
+    </div>
+    <div class="game-card border border-gray-700">
+      <img
+        src="assets/games/hollow_knight_silksong.webp"
+        alt="Hollow Knight: Silksong"
+        class="w-full h-full object-cover rounded-xl"
+      />
+      <span class="game-title">Hollow Knight: Silksong</span>
+    </div>
+    <div class="game-card border border-gray-700">
+      <img
+        src="assets/games/forza_horizon_5.webp"
+        alt="Forza Horizon 5"
+        class="w-full h-full object-cover rounded-xl"
+      />
+      <span class="game-title">Forza Horizon 5</span>
+    </div>
+    <div class="game-card border border-gray-700">
+      <img
+        src="assets/games/spiderman2.avif"
+        alt="Spider-Man 2"
+        class="w-full h-full object-cover rounded-xl"
+      />
+      <span class="game-title">Spider-Man 2</span>
+    </div>
+    <div class="game-card border border-gray-700">
+      <img
+        src="assets/games/fortnite.webp"
+        alt="Fortnite"
+        class="w-full h-full object-cover rounded-xl"
+      />
+      <span class="game-title">Fortnite</span>
+    </div>
+    <div class="game-card border border-gray-700">
+      <img
+        src="assets/games/brotato.webp"
+        alt="Brotato"
+        class="w-full h-full object-cover rounded-xl"
+      />
+      <span class="game-title">Brotato</span>
+    </div>
+    <div class="game-card border border-gray-700">
+      <img
+        src="assets/games/DOOMEternal.webp"
+        alt="Doom Eternal"
+        class="w-full h-full object-cover rounded-xl"
+      />
+      <span class="game-title">Doom Eternal</span>
+    </div>
+  </ng-template>
+
+  <ng-template #row3>
+    <div class="game-card border border-gray-700">
+      <img
+        src="assets/games/Horizon-2.webp"
+        alt="Horizon FW"
+        class="w-full h-full object-cover rounded-xl"
+      />
+      <span class="game-title">Horizon FW</span>
+    </div>
+    <div class="game-card border border-gray-700">
+      <img
+        src="assets/games/assassins.webp"
+        alt="AC Shadows"
+        class="w-full h-full object-cover rounded-xl"
+      />
+      <span class="game-title">AC Shadows</span>
+    </div>
+    <div class="game-card border border-gray-700">
+      <img
+        src="assets/games/SparkingZero.webp"
+        alt="Dragon Ball Sparking Zero"
+        class="w-full h-full object-cover rounded-xl"
+      />
+      <span class="game-title">Dragon Ball Sparking Zero</span>
+    </div>
+    <div class="game-card border border-gray-700">
+      <img
+        src="assets/games/DarkSoulsIII.webp"
+        alt="Dark Souls III"
+        class="w-full h-full object-cover rounded-xl"
+      />
+      <span class="game-title">Dark Souls III</span>
+    </div>
+    <div class="game-card border border-gray-700">
+      <img
+        src="assets/games/Hades.webp"
+        alt="Hades"
+        class="w-full h-full object-cover rounded-xl"
+      />
+      <span class="game-title">Hades</span>
+    </div>
+    <div class="game-card border border-gray-700">
+      <img
+        src="assets/games/ghost-of-tsushima.webp"
+        alt="Ghost of Tsushima"
+        class="w-full h-full object-cover rounded-xl"
+      />
+      <span class="game-title">Ghost of Tsushima</span>
+    </div>
+    <div class="game-card border border-gray-700">
+      <img
+        src="assets/games/HollowKnight.webp"
+        alt="Hollow Knight"
+        class="w-full h-full object-cover rounded-xl"
+      />
+      <span class="game-title">Hollow Knight</span>
+    </div>
+    <div class="game-card border border-gray-700">
+      <img
+        src="assets/games/nine_sols.webp"
+        alt="Nine Sols"
+        class="w-full h-full object-cover rounded-xl"
+      />
+      <span class="game-title">Nine Sols</span>
+    </div>
+  </ng-template>

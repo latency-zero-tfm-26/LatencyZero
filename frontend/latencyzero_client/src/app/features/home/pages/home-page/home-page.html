@@ -37,93 +37,52 @@
   </section>
 
   <!-- Features -->
-  <section id="features" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+  <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
     <div
-      class="bg-slate-900 rounded-2xl border border-slate-700 p-6 flex flex-col items-start gap-4 hover:shadow-2xl transition-shadow duration-300"
-    >
-      <div
-        class="w-12 h-12 flex items-center justify-center bg-slate-800 rounded-lg text-yellow-500"
+      class="bg-slate-900 rounded-2xl border border-slate-700 bg-linear-to-br from-yellow-500/10 via-slate-800/40 to-slate-900/80 p-6 hover:border-yellow-500/50 transition-all group"
+      routerLink="/hardvisionai"
       >
-        <img src="assets/svg/memory.svg" alt="Componentes" class="w-6 h-6" />
+      <div
+        class="w-12 h-12 rounded-lg bg-slate-800 flex items-center justify-center mb-4 text-yellow-500 group-hover:scale-110 transition-transform"
+      >
+        <img src="assets/svg/memory.svg" alt="Componentes" />
       </div>
-      <h3 class="text-lg font-semibold text-white">HardVision AI</h3>
+      <h3 class="text-lg font-semibold text-white mb-2">HardVision AI</h3>
       <p class="text-sm text-slate-400">
         Reconocimiento automático de hardware mediante visión artificial avanzada.
       </p>
     </div>
 
     <div
-      class="bg-slate-900 rounded-2xl border border-slate-700 p-6 flex flex-col items-start gap-4 hover:shadow-2xl transition-shadow duration-300"
-    >
-      <div
-        class="w-12 h-12 flex items-center justify-center bg-slate-800 rounded-lg text-yellow-500"
+      class="bg-slate-900 rounded-2xl border border-slate-700 bg-linear-to-br from-yellow-500/10 via-slate-800/40 to-slate-900/80 p-6 hover:border-yellow-500/50 transition-all group"
+      routerLink="/agente"
       >
-        <img src="assets/svg/smart_toy.svg" alt="Agente" class="w-6 h-6" />
+      <div
+        class="w-12 h-12 rounded-lg bg-slate-800 flex items-center justify-center mb-4 text-yellow-500 group-hover:scale-110 transition-transform"
+      >
+        <img src="assets/svg/smart_toy.svg" alt="Componentes" />
       </div>
-      <h3 class="text-lg font-semibold text-white">Agente</h3>
+      <h3 class="text-lg font-semibold text-white mb-2">Agente</h3>
       <p class="text-sm text-slate-400">
-        Asistente virtual inteligente que te guía paso a paso en la construcción de tu PC ideal.
+        Asistente virtual inteligente que te guía paso a paso en la construcción de tu PC ideal y te resuelve dudas.
       </p>
     </div>
 
     <div
-      class="bg-slate-900 rounded-2xl border border-slate-700 p-6 flex flex-col items-start gap-4 hover:shadow-2xl transition-shadow duration-300"
-    >
-      <div
-        class="w-12 h-12 flex items-center justify-center bg-slate-800 rounded-lg text-yellow-500"
+      class="bg-slate-900 rounded-2xl border border-slate-700 bg-linear-to-br from-yellow-500/10 via-slate-800/40 to-slate-900/80 p-6 hover:border-yellow-500/50 transition-all group lg:col-span-1 md:col-span-2"
+      routerLink="/docs"
       >
-        <img src="assets/svg/docs.svg" alt="Docs" class="w-6 h-6" />
+      <div
+        class="w-12 h-12 rounded-lg bg-slate-800 flex items-center justify-center mb-4 text-yellow-500 group-hover:scale-110 transition-transform"
+      >
+        <img src="assets/svg/docs.svg" alt="Componentes" />
       </div>
-      <h3 class="text-lg font-semibold text-white">Docs</h3>
+      <h3 class="text-lg font-semibold text-white mb-2">Docs</h3>
       <p class="text-sm text-slate-400">
         Guías detalladas, tutoriales y recursos para aprender sobre PCs.
       </p>
     </div>
   </section>
 
-  <!-- Testimonios
-  <section class="mt-16">
-    <h2 class="text-2xl font-bold text-white mb-6">Lo que dicen nuestros usuarios</h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      <div class="bg-slate-900 p-6 rounded-2xl border border-slate-700 shadow-md">
-        <p class="text-slate-400 italic mb-4">
-          "LatencyZero me ayudó a armar mi PC sin dolores de cabeza, la recomiendo 100%."
-        </p>
-        <div class="flex items-center gap-3">
-          <div
-            class="w-10 h-10 rounded-full bg-yellow-500 flex items-center justify-center text-slate-950 font-bold"
-          >
-            A
-          </div>
-          <span class="text-white font-semibold">Ana P.</span>
-        </div>
-      </div>
-      <div class="bg-slate-900 p-6 rounded-2xl border border-slate-700 shadow-md">
-        <p class="text-slate-400 italic mb-4">
-          "El Agente es increíble, me guiaba paso a paso y ahorré mucho tiempo."
-        </p>
-        <div class="flex items-center gap-3">
-          <div
-            class="w-10 h-10 rounded-full bg-yellow-500 flex items-center justify-center text-slate-950 font-bold"
-          >
-            J
-          </div>
-          <span class="text-white font-semibold">Juan M.</span>
-        </div>
-      </div>
-      <div class="bg-slate-900 p-6 rounded-2xl border border-slate-700 shadow-md">
-        <p class="text-slate-400 italic mb-4">
-          "La documentación es muy clara y útil para principiantes y expertos."
-        </p>
-        <div class="flex items-center gap-3">
-          <div
-            class="w-10 h-10 rounded-full bg-yellow-500 flex items-center justify-center text-slate-950 font-bold"
-          >
-            L
-          </div>
-          <span class="text-white font-semibold">Luis F.</span>
-        </div>
-      </div>
-    </div>
-  </section> -->
+  <app-game-component></app-game-component>
 </main>
