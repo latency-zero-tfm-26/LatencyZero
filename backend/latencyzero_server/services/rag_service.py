@@ -1,12 +1,4 @@
 import os
-from langchain_huggingface import HuggingFaceEmbeddings
-from langchain_milvus import Milvus
-from langchain_groq import ChatGroq
-from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
-from langchain_core.runnables import RunnablePassthrough
-from langchain_core.output_parsers import StrOutputParser
-from langchain_core.messages import HumanMessage, AIMessage
-
 from ..core.config import settings
 
 # Variable global para no recargar el modelo pesado en cada peticion HTTP
@@ -17,6 +9,14 @@ def get_rag_chain():
     global _rag_chain, _retriever
     if _rag_chain is not None:
         return _rag_chain, _retriever
+
+    # Imports pesados aquí dentro para no bloquear el arranque
+    from langchain_huggingface import HuggingFaceEmbeddings
+    from langchain_milvus import Milvus
+    from langchain_groq import ChatGroq
+    from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
+    from langchain_core.runnables import RunnablePassthrough
+    from langchain_core.output_parsers import StrOutputParser
 
     # 1. Cargar del modelo de embeddings
     embeddings = HuggingFaceEmbeddings(
@@ -47,7 +47,7 @@ def get_rag_chain():
     try:
         with open(prompt_path, "r", encoding="utf-8") as f:
             system_prompt = f.read()
-    except Exception:
+    except Exception as e:
         print(f"Error al cargar el System Prompt: {e}")
         system_prompt = "Eres un asistente de hardware. [CONTEXTO RECUPERADO]:\n{context}"
 
@@ -73,8 +73,11 @@ def get_rag_chain():
     
     return _rag_chain, _retriever
 
+
 # Recibe la nueva pregunta y el historial en formato de diccionarios, lo adapta a objetos de LangChain y ejecuta la tubería RAG.
 def ask_rag_with_history(user_input: str, history_dicts: list) -> str:
+    from langchain_core.messages import HumanMessage, AIMessage
+
     chain, _ = get_rag_chain()
     
     # Convertir el historial de diccionario a objetos message de LangChain
