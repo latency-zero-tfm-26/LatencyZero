@@ -5,6 +5,14 @@ from typing import Dict, Any, List
 from ..utils.components_labels import LABEL_MAP, TRANSLATION_MAP, COMPONENT_LABELS, JUNK_LABELS
 from ..schemas.component import ComponentDTO
 
+import cv2 
+from tensorflow.keras.models import load_model
+from transformers import CLIPProcessor, CLIPModel
+import easyocr
+import numpy as np
+from PIL import Image 
+import torch
+
 _model = None
 _reader = None
 _clip_model = None
@@ -12,11 +20,6 @@ _clip_processor = None
 
 def init_service(model_path: str = None, ocr_langs=["en"], use_gpu=False):
     global _model, _reader, _clip_model, _clip_processor
-
-    import cv2 
-    from tensorflow.keras.models import load_model
-    from transformers import CLIPProcessor, CLIPModel
-    import easyocr
 
     if _model is None:
         if model_path is None:
@@ -34,9 +37,6 @@ def init_service(model_path: str = None, ocr_langs=["en"], use_gpu=False):
 
 
 def _process_image_bytes(image_bytes: bytes):
-    import cv2       
-    import numpy as np
-    from PIL import Image 
     try:
         arr = np.frombuffer(image_bytes, np.uint8)
         img = cv2.imdecode(arr, cv2.IMREAD_COLOR)
@@ -55,7 +55,6 @@ def _process_image_bytes(image_bytes: bytes):
 
 
 def _filter_image_with_clip(image, threshold: float = 0.6) -> bool:
-    import torch
     global _clip_model, _clip_processor
 
     if _clip_model is None or _clip_processor is None:
@@ -80,7 +79,6 @@ def _filter_image_with_clip(image, threshold: float = 0.6) -> bool:
 
 
 def predict_from_bytes(image_bytes: bytes) -> ComponentDTO:
-    import numpy as np
     global _model, _reader
     try:
         if _model is None or _reader is None:
