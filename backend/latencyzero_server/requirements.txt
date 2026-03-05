@@ -24,3 +24,4 @@ langchain-milvus
 langchain-huggingface
 pymilvus
 sentence-transformers
+psycopg2-binary
