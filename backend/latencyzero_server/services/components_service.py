@@ -4,9 +4,9 @@ import cv2
 import numpy as np
 import torch
 from PIL import Image
-from tensorflow.keras.models import load_model
-from transformers import CLIPProcessor, CLIPModel
-import easyocr
+# from tensorflow.keras.models import load_model
+# from transformers import CLIPProcessor, CLIPModel
+# import easyocr
 from typing import Dict, Any, List
 
 from ..utils.components_labels import LABEL_MAP, TRANSLATION_MAP, COMPONENT_LABELS, JUNK_LABELS
@@ -17,19 +17,26 @@ _reader = None
 _clip_model = None
 _clip_processor = None
 
-def init_service(model_path: str = None, ocr_langs: List[str] = ["en"], use_gpu: bool = False):
-  global _model, _reader, _clip_model, _clip_processor
-  if _model is None:
-    if model_path is None:
-      base = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-      model_path = os.path.join(base, "ml", "components_pc_model.keras")
-    _model = load_model(model_path)
-  if _reader is None:
-    _reader = easyocr.Reader(ocr_langs, gpu=use_gpu)
-  if _clip_model is None:
-    model_id = "openai/clip-vit-base-patch32"
-    _clip_model = CLIPModel.from_pretrained(model_id)
-    _clip_processor = CLIPProcessor.from_pretrained(model_id)
+def init_service(model_path: str = None, ocr_langs=["en"], use_gpu=False):
+    global _model, _reader, _clip_model, _clip_processor
+
+    from tensorflow.keras.models import load_model
+    from transformers import CLIPProcessor, CLIPModel
+    import easyocr
+
+    if _model is None:
+        if model_path is None:
+            base = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+            model_path = os.path.join(base, "ml", "components_pc_model.keras")
+        _model = load_model(model_path)
+
+    if _reader is None:
+        _reader = easyocr.Reader(ocr_langs, gpu=use_gpu)
+
+    if _clip_model is None:
+        model_id = "openai/clip-vit-base-patch32"
+        _clip_model = CLIPModel.from_pretrained(model_id)
+        _clip_processor = CLIPProcessor.from_pretrained(model_id)
 
 
 def _process_image_bytes(image_bytes: bytes):
