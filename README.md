@@ -1,7 +1,7 @@
 ![](/img/LatencyZero.png)
 # LatencyZero
 
-**LatencyZero** es una plataforma web innovadora y robusta diseñada para facilitar el acceso al conocimiento tecnológico relacionado con el montaje, la configuración y la compatibilidad de componentes informáticos. Su principal propósito es proporcionar las herramientas necesarias para que cualquier usuario desde principiantes hasta entusiastas experimentados pueda aprender, tomar decisiones fundamentadas y construir o mejorar su equipo informático de una manera sencilla, intuitiva y segura.
+**LatencyZero** es una plataforma web innovadora y robusta diseñada para facilitar el acceso al conocimiento tecnológico relacionado con el montaje, la configuración y la compatibilidad de componentes informáticos. Su principal propósito es proporcionar las herramientas necesarias para que cualquier usuario desde principiantes hasta entusiastas experimentados, pueda aprender, tomar decisiones fundamentadas y construir o mejorar su equipo informático de una manera sencilla, intuitiva y segura.
 
 Nuestra plataforma integra un potente **agente inteligente** alimentado por Inteligencia Artificial, que trabaja en conjunto con diversas herramientas interactivas y modelos de visión artificial, diseñadas para guiar al usuario en cada etapa del proceso de selección, análisis de compatibilidad y comparación de componentes hardware.
 
@@ -12,6 +12,8 @@ Nuestra plataforma integra un potente **agente inteligente** alimentado por Inte
 **TFM del Máster de FP en Inteligencia Artificial y Big Data - CPIFP Alan Turing**
 
 ## ✨ Vista previa de la aplicación
+
+![Home](/img/home_pro.png)
 
 A continuación se muestran algunas demostraciones de las principales funcionalidades del sistema.
 
