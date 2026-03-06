@@ -1,21 +1,15 @@
 ![](/img/LatencyZero.png)
 # LatencyZero
 
-**LatencyZero** es una plataforma web innovadora y robusta diseñada para facilitar el acceso al conocimiento tecnológico relacionado con el montaje, la configuración y la compatibilidad de componentes informáticos. Su principal propósito es proporcionar las herramientas necesarias para que cualquier usuario —desde principiantes hasta entusiastas experimentados— pueda aprender, tomar decisiones fundamentadas y construir o mejorar su equipo informático de una manera sencilla, intuitiva y segura.
+**LatencyZero** es una plataforma web innovadora y robusta diseñada para facilitar el acceso al conocimiento tecnológico relacionado con el montaje, la configuración y la compatibilidad de componentes informáticos. Su principal propósito es proporcionar las herramientas necesarias para que cualquier usuario desde principiantes hasta entusiastas experimentados pueda aprender, tomar decisiones fundamentadas y construir o mejorar su equipo informático de una manera sencilla, intuitiva y segura.
 
 Nuestra plataforma integra un potente **agente inteligente** alimentado por Inteligencia Artificial, que trabaja en conjunto con diversas herramientas interactivas y modelos de visión artificial, diseñadas para guiar al usuario en cada etapa del proceso de selección, análisis de compatibilidad y comparación de componentes hardware.
 
+👉 Más información en la **[Wiki del proyecto](https://github.com/Latency-Zero-tfm/LatencyZero/wiki)**.
+
+🌐 Puedes acceder a la aplicación web en: https://latencyzero.vercel.app/
+
 **Trabajo de Fin de Máster (TFM) del Máster de Formación Profesional en Inteligencia Artificial y Big Data - CPIFP Alan Turing**
-
-## 🎯 Justificación del Proyecto
-
-En la era digital actual, un ordenador de sobremesa es una herramienta fundamental e imprescindible, tanto en el ámbito profesional y académico, como en el del entretenimiento. No obstante, aunque una gran mayoría de usuarios necesita un equipo que se adapte milimétricamente a sus requerimientos y presupuesto, pocos cuentan con los conocimientos técnicos especializados para elegir adecuadamente cada pieza, verificar la sinergia de los componentes o realizar actualizaciones con total seguridad.
-
-Es por ello que la creación de una plataforma capaz de actuar como un asesor virtual, acompañando al usuario en la resolución de sus dudas y proporcionando utilidades prácticas sobre configuración y selección de hardware, resulta crítica. Un sistema de estas características no sólo agiliza y respalda el proceso de toma de decisiones, sino que minimiza significativamente la probabilidad de errores de ensamblaje y compras innecesarias o incompatibles.
-
-Además, **LatencyZero** ha sido ideado no solo como un asistente para novatos en el mundo del hardware. Los profesionales y aquellos con conocimientos avanzados también obtendrán un gran beneficio de un sistema que centraliza y filtra información actualizada, acelerando las búsquedas y consultas técnicas, reduciendo el margen de error, y ofreciendo asistencia experta al instante.
-
-En definitiva, **LatencyZero** aporta un valor diferencial indiscutible al democratizar el acceso al conocimiento tecnológico especializado, transformando una labor frecuentemente compleja y desafiante en un proceso accesible, didáctico y directo.
 
 ## 🖥️ HardVisionAI
 

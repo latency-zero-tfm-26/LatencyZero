@@ -17,8 +17,6 @@ Estos portales proveen información crucial detallando cientos de miles de marca
 
 Como información complementaria vital, hemos extraído y procesado automáticamente los **requisitos de hardware mínimos y recomendados de videojuegos** a través de la API y páginas de Steam en español. Gracias a este trabajo, el agente IA posee un contexto actualizado para asesorar a los usuarios que preguntan: *"¿Es mi ordenador compatible con el juego X?"*.
 
----
-
 ## 📂 Estructura del Directorio de Datos
 
 A continuación, se detalla el árbol de carpetas del proyecto, indicando cómo fluye la información desde su estado virgen hasta su formato final procesado:
