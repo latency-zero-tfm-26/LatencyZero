@@ -9,7 +9,6 @@ Este proyecto fue estructurado y generado originalmente con la herramienta *Angu
 ![Node Version](https://img.shields.io/badge/node-v22.22.0-339933?logo=node.js&logoColor=white)
 ![Angular CLI Version](https://img.shields.io/badge/angular_cli-v20.3.15-DD0031?logo=angular&logoColor=white)
 
----
 
 ## 📦 Herramientas y Versiones Necesarias
 
@@ -28,7 +27,7 @@ Una vez hayas instalado **Node.js**, puedes instalar Angular abriendo tu termina
 npm install -g @angular/cli@20.3.15
 ```
 
-### 🔎 ¿Cómo compruebo qué versiones tengo instaladas?
+#### 🔎 ¿Cómo compruebo qué versiones tengo instaladas?
 
 Si ya tienes estos programas y quieres comprobar si tus versiones son correctas, abre tu terminal y ejecuta los siguientes comandos:
 
@@ -38,8 +37,6 @@ ng version
 ```
 
 Si los números que aparecen no coinciden con las versiones requeridas, te recomendamos actualizarlos antes de continuar para evitar posibles problemas.
-
----
 
 ## ⚡ Guía de Instalación y Puesta en Marcha
 
