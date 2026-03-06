@@ -9,7 +9,7 @@ Nuestra plataforma integra un potente **agente inteligente** alimentado por Inte
 
 🌐 Puedes acceder a la aplicación web en: https://latencyzero.vercel.app/
 
-**Trabajo de Fin de Máster (TFM) del Máster de Formación Profesional en Inteligencia Artificial y Big Data - CPIFP Alan Turing**
+**TFM del Máster de FP en Inteligencia Artificial y Big Data - CPIFP Alan Turing**
 
 ## 🖥️ HardVisionAI
 
