@@ -11,6 +11,40 @@ Nuestra plataforma integra un potente **agente inteligente** alimentado por Inte
 
 **TFM del Máster de FP en Inteligencia Artificial y Big Data - CPIFP Alan Turing**
 
+## ✨ Vista previa de la aplicación
+
+A continuación se muestran algunas demostraciones de las principales funcionalidades del sistema.
+
+### 🏠 Home y HardVisionAI
+Interfaz principal de la aplicación junto con la funcionalidad de análisis de componentes mediante HardVisionAI.
+
+https://github.com/user-attachments/assets/1684477b-1d1b-43b9-ad1d-9055787b035b
+
+### 🤖 Agente Inteligente
+Demostración del agente capaz de responder consultas técnicas utilizando la base de conocimientos del sistema y HardVisionAI.
+
+https://github.com/user-attachments/assets/e92a8d7d-96f6-4a36-8f85-92c50158ee90
+
+### ⭐ Sistema de Reviews
+Visualización y gestión de reseñas de componentes realizadas por los usuarios.
+
+https://github.com/user-attachments/assets/cf7bca82-c3e0-441e-937a-c6286dfb985b
+
+### 🛠️ Panel de Administración
+Panel interno para la gestión de usuarios y reviews.
+
+https://github.com/user-attachments/assets/d6c7301a-eddb-4bc7-9aa4-362b6eed2735
+
+### 📚 Documentación (Página Estática)
+Sección de documentación sobre ordenadores accesible desde la propia aplicación.
+
+https://github.com/user-attachments/assets/a9195d45-0c5f-4ab8-8855-957c8b767f23
+
+### 🔐 Login y Registro
+Sistema de autenticación para el acceso y creación de cuentas de usuario.
+
+https://github.com/user-attachments/assets/a3c2fcc6-e9a7-4087-b35d-d643314e13dd
+
 ## 🖥️ HardVisionAI
 
 **HardVisionAI** es un modelo avanzado de visión artificial que ha sido entrenado y optimizado en nuestro ecosistema para identificar, clasificar y extraer información automáticamente de diversos componentes de ordenador mediante el análisis de imágenes. Es capaz de deducir datos técnicos cruciales como la marca, el modelo y sus especificaciones clave.
