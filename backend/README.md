@@ -4,7 +4,6 @@ Backend central desarrollado con el framework **FastAPI** diseñado para exponer
 
 ![Python Version](https://img.shields.io/badge/python-3.12-blue?logo=python\&logoColor=white)
 
----
 
 ## 🤖 Agente de IA y Proceso en Segundo Plano
 
@@ -24,8 +23,6 @@ El componente central de inteligencia de LatencyZero está impulsado por un agen
 
 5. **Generación (llama-3.3-70b-versatile de Meta):** Finalmente, toda esta amalgama de información estructurada, contexto histórico, reglas del sistema y contexto recuperado vectorialmente es enviada al potente LLM `Llama-3.3-70b-versatile` de Meta (usando la API de Groq), responsable de generar la respuesta inteligente final, humana y altamente precisa que recibe el usuario.
 
----
-
 ## 👁️‍🗨️ HardVisionAI: Pipeline de Visión Artificial
 
 Para clasificar componentes desde una imagen, hemos desarrollado una tubería (pipeline) de procesamiento con las siguientes etapas:
@@ -42,15 +39,13 @@ Para clasificar componentes desde una imagen, hemos desarrollado una tubería (p
 
 4. **Resultado (Clasificación + OCR):** El resultado final combina la etiqueta de clasificación principal generada por el modelo Keras, junto con todos los metadatos de texto extraídos por el OCR, devolviendo una estructura rica en datos (*ComponentDTO*) que se puede utilizar tanto en la interfaz del usuario como para dar contexto directo al Agente de IA.
 
----
 
 ## 📌 Diagrama Entidad-Relación
 
 La estructura subyacente de la base de datos relacional de LatencyZero se representa a continuación:
 
-![latencyzero](/backend/db/latencyzero.png)
+![latencyzero](/backend/db/latencyzero_dark.png)
 
----
 
 ## 🧪 Instalación y Ejecución del Backend
 
