@@ -1,13 +1,16 @@
 # 🖥️ LatencyZero Client (Frontend)
 
-El **Cliente de LatencyZero** es la cara visible de nuestra plataforma, es decir, la interfaz web interactiva con la que los usuarios se comunican. Ha sido diseñada y desarrollada usando **Angular**, lo que nos permite ofrecer una experiencia de usuario rápida, dinámica y fluida.
+Frontend desarrollado en **Angular** para consumir y presentar servicios de Machine Learning, agentes basados en LLM y otras funcionalidades del ecosistema LatencyZero.
 
-A través de esta interfaz, cualquier usuario —incluso si no tiene conocimientos de programación o Inteligencia Artificial— puede interactuar con nuestros agentes virtuales, analizar componentes hardware mediante imágenes, y acceder a todo el ecosistema de herramientas de **LatencyZero** de manera intuitiva y visual.
+El proyecto esta desplegado en **Vercel**, lo que garantiza una alta disponibilidad y rendimiento. Puedes acceder a la plataforma a través del siguiente enlace: [LatencyZero en Vercel](https://latencyzero.vercel.app/). 
 
-Este proyecto fue estructurado y generado originalmente con la herramienta *Angular CLI 20.3.15*.
+Sin embargo, ten en cuenta que el despliegue del back es temporal, por lo que algunas funcionalidades podrían no estar disponibles en el futuro.
 
 ![Node Version](https://img.shields.io/badge/node-v22.22.0-339933?logo=node.js&logoColor=white)
 ![Angular CLI Version](https://img.shields.io/badge/angular_cli-v20.3.15-DD0031?logo=angular&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/tailwind%20css-3.3-blue?logo=tailwindcss&logoColor=white)
+![Vercel](https://img.shields.io/badge/deployed%20on-Vercel-black?logo=vercel&logoColor=white)
+![Vercel Deploy](https://deploy-badge.vercel.app/?url=https://latencyzero.vercel.app/&name=LatencyZero)
 
 
 ## 📦 Herramientas y Versiones Necesarias
