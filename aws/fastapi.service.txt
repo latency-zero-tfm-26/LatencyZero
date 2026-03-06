@@ -1,0 +1,14 @@
+[Unit]
+Description=FastAPI LatencyZero
+After=network.target
+
+[Service]
+User=ubuntu
+WorkingDirectory=/home/ubuntu/LatencyZero/backend
+ExecStart=/home/ubuntu/LatencyZero/backend/venv/bin/uvicorn latencyzero_server.main:app --host 0.0.0.0 --port 8000
+Restart=always
+RestartSec=5
+EnvironmentFile=/home/ubuntu/LatencyZero/backend/.env
+
+[Install]
+WantedBy=multi-user.target
