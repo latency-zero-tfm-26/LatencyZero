@@ -1,80 +1,95 @@
-# 📒 Documentación de Notebooks
+# 📒 Documentación de Jupyter Notebooks
 
-Este repositorio contiene todos los cuadernos de Jupyter utilizados a lo largo del proyecto **LatencyZero**.
+Este repositorio actúa como el laboratorio de ciencia de datos, estructuración e investigación detrás de **LatencyZero**. Alberga todos los *Cuadernos de Jupyter* (Jupyter Notebooks) iterados y diseñados por nuestro equipo a lo largo del ciclo de vida del proyecto.
 
 ![Python Version](https://img.shields.io/badge/python-3.12-blue?logo=python&logoColor=white)
 
-## 📚 Notebooks principales
+---
 
-| Nombre del Cuaderno                  | Descripción |
-|------------------------------------|-------------|
-| `model_training_components_pc.ipynb` | Entrenamiento de la red neuronal para la clasificación de componentes de PC. |
-| `model_ocr.ipynb`                   | Aplicación de OCR a las imágenes del dataset para extraer texto, marcas, modelos y especificaciones. |
-| `model_openai.ipynb`                | Pruebas con el modelo `openai/clip-vit-base-patch32` para clasificar si una imagen contiene un componente o no. |
+## 📚 Notebooks Principales (Raíz)
 
+Estos son los cuadernos nucleares que engloban el entrenamiento, las pruebas y los análisis fundamentales de Inteligencia Artificial de nuestra plataforma:
 
-## 🖥️ HardvisionAI `/hardvision_ai`
+| 📓 Nombre del Cuaderno | 📝 Descripción Técnica del Proceso |
+| :--- | :--- |
+| `model_training_components_pc.ipynb` | **Entrenamiento de la Red Neuronal Convolucional (CNN).** Toma el dataset procesado de imágenes, construye la arquitectura (Keras/TensorFlow), aplica técnicas de Data Augmentation, entrena el modelo de clasificación de 11 categorías (`components_pc_model.keras`) y genera métricas de rendimiento (*Accuracy, Loss, Confusion Matrix*). |
+| `model_ocr.ipynb` | **Extracción de Texto con OCR.** Utiliza la librería *EasyOCR* (basada en PyTorch) para escanear las imágenes del dataset, detectar contornos de texto, y extraer cadenas útiles (marcas, modelos, seriales, GBs, voltajes). Posteriormente limpia el texto para facilitar su ingesta por el Agente LLM. |
+| `model_openai.ipynb` | **Filtro CLIP Vision.** Implementa pruebas con el modelo multimodal `openai/clip-vit-base-patch32` (Zero-Shot Image Classification) para calcular la probabilidad de que una imagen contenga un componente de PC válido, filtrando ruido visual antes de pasar por el clasificador de Keras. |
+| `ingest.ipynb` | **Ingesta de Vectores (RAG).** Se encarga de transformar los documentos JSONL procesados en embeddings usando `BAAI/bge-m3`, empaquetarlos en lotes (batching) e inyectarlos en la base de datos vectorial (Milvus) para nutrir la base de conocimientos del Agente de IA. |
 
-Estos notebooks contienen todos los pasos del proyecto, desde la recopilación y limpieza de datos hasta las pruebas previas a la implementación, excepto el entrenamiento del modelo y el OCR.
+---
 
-| Nombre del Cuaderno | Descripción |
-|---------------------|-------------|
-| `create_and_clean_dataset.ipynb` | Crea el dataset original con las URLs de las imágenes y sus etiquetas (labels). |
-| `dataset_processing.ipynb` | Transforma el dataset guardando imágenes localmente y convirtiendo etiquetas a valores numéricos. |
-| `app.ipynb` | Integra `model_ocr.ipynb` y `model_training`, usando el código para la interfaz de Streamlit. |
+## 🖥️ HardvisionAI (`/hardvision_ai`)
 
-## 🌐 Web scraping `/scraping`
+Subdirectorio que contiene el flujo de trabajo secuencial para la preparación, limpieza y prueba conceptual de **HardVisionAI** antes de su integración oficial en el Backend de LatencyZero.
 
-Estos notebooks realizan la extracción de datos desde distintas fuentes web de componentes de PC.
+| 📓 Nombre del Cuaderno | 📝 Descripción Técnica del Proceso |
+| :--- | :--- |
+| `create_and_clean_dataset.ipynb` | **Génesis del Dataset Visual.** Se conecta a las fuentes crudas, extrae las URLs de las imágenes y mapea sus respectivas etiquetas (labels). Filtra enlaces rotos y unifica la taxonomía (ej. agrupa *CPU Coolers* bajo `cpu_fan`). |
+| `dataset_processing.ipynb` | **Descarga y Transformación Vectorial.** Recorre el dataset anterior para descargar físicamente cada imagen en el disco duro, redimensionándolas y convirtiendo sus etiquetas categóricas en representaciones numéricas (*One-Hot Encoding* o *Label Encoding*) listas para Keras. |
+| `app.ipynb` | **Prototipo Interactivo (Streamlit).** Código base de la aplicación de prueba que integra tanto la inferencia del modelo preentrenado como el OCR, presentando todo bajo la interfaz web interactiva de *Streamlit* mencionada en la documentación general. |
 
-| Nombre del Cuaderno | Descripción |
-|---------------------|-------------|
-| `scraping_pccomponentes.ipynb` | Realiza un scraping generico a PcCompoenentes de cada componente de cada categoria. |
-| `scraping_pcpartpicker.ipynb`| Realiza un scraping generico y completo a PCPartPicker de cada componente de cada categoria. |
-| `scraping_pcpartpicker_motherboards.ipynb`| Realiza un scraping preciso a las placas bases de PCPartPicker, recogiendo y adjuntando cada componente de cada categoria compatible con cada placa base recolectada. |
-| `scraping_pangoly.ipynb`| Realiza un scraping preciso a las placas bases de Pangoly, recogiendo y adjuntando cada componente de cada categoria compatible con cada placa base recolectada. |
-| `scraping_steam.ipynb`| Realiza un scarping a Steam de los requisitos minimos y recomendados de una gran variedad de videojuegos y de los componentes de Hardware mas utilizados por los usuarios de la plataforma. |
-| `scraping_techpowerup.ipynb`| Realiza un scraping preciso y completo a las CPUs de TechPowerUp. |
+---
 
+## 🌐 Web Scraping (`/scraping`)
 
-## 🐍 Versión de Python
+Esta suite de cuadernos contiene los *spiders* (arañas web) diseñados para realizar el volcado masivo y automatizado de datos estructurados desde los portales de hardware más relevantes.
 
-El proyecto utiliza Python 3.12 para todo el código.
+| 📓 Nombre del Cuaderno | 📝 Descripción Técnica del Proceso |
+| :--- | :--- |
+| `scraping_pccomponentes.ipynb` | Scraping general iterando sobre el catálogo de PcComponentes. Extrae listas de precios, nombres, características base y URLs de imágenes de cada categoría de componente. |
+| `scraping_pcpartpicker.ipynb` | Extracción profunda de las bases de datos de PCPartPicker, capturando cada componente de cada categoría, esquivando bloqueos mediante delays controlados. |
+| `scraping_pcpartpicker_motherboards.ipynb` | **Extracción Cruzada de Compatibilidad (PCPartPicker).** Script avanzado que entra placa base por placa base, y recolecta explícitamente qué RAM, CPU, y Almacenamiento específicos son 100% compatibles con esa placa base exacta, estructurando las relaciones. |
+| `scraping_pangoly.ipynb` | **Extracción Cruzada de Compatibilidad (Pangoly).** Análogo al anterior pero extrayendo datos cruzados de validación de placas base desde la estructura web de Pangoly, garantizando una doble comprobación de compatibilidad. |
+| `scraping_steam.ipynb` | **Minería de Requisitos Gaming.** Navega por la tienda de Steam capturando los metadatos de "Requisitos Mínimos" y "Recomendados" de los títulos más jugados. Adicionalmente, escrapea la *Steam Hardware Survey* para conocer el hardware top tier utilizado mundialmente. |
+| `scraping_techpowerup.ipynb` | Scraping quirúrgico a TechPowerUp para descargar arquitecturas complejas de CPU (litografías, sockets exactos, transistores, IPC), datos cruciales para nuestro Agente Inteligente. |
+
+---
+
+## 🐍 Entorno Virtual y Versión de Python
+
+Todo el código contenido en estos cuadernos está escrito y certificado bajo **Python 3.12**.
 
 > [!NOTE]
-> Asegúrate de instalar Python 3.12 antes de crear el entorno virtual para que todos los notebooks y la demo funcionen correctamente.
+> Es de suma importancia asegurar que tienes instalada la versión de **Python 3.12** antes de instanciar el entorno virtual. De lo contrario, librerías que gestionan tensores (como TensorFlow/Keras) o procesamiento en GPU (PyTorch/EasyOCR) podrían generar conflictos de compatibilidad al ejecutar las celdas.
 
+## ⚡ Guía para Ejecutar Notebooks Localmente
 
-## ⚡ Ejecutar notebooks en entorno local
+Sigue esta metodología para levantar el entorno de Jupyter en tu máquina y experimentar con el código paso a paso:
 
-1. **Crear el entorno virtual**
+### 1. Crear un Entorno Virtual (Aislamiento)
 
-   ```bash
-   python -m venv venv
-   ```
+```bash
+python -m venv venv
+```
 
-2. **Activar el entorno**
+### 2. Activar el Entorno
 
-   * En **Linux / macOS**:
+* En **Linux / macOS**:
+  ```bash
+  source venv/bin/activate
+  ```
 
-     ```bash
-     source venv/bin/activate
-     ```
-   * En **Windows**:
+* En **Windows**:
+  ```cmd
+  venv\Scripts\activate
+  ```
 
-     ```cmd
-     venv\Scripts\activate
-     ```
+### 3. Instalar Dependencias Centrales
 
-3. **Instalar dependencias**
+Asegúrate de instalar los requerimientos listados para el entorno de Machine Learning:
 
-    ```bash
-    ip install -r requirements.txt
-     ```
+```bash
+pip install -r requirements.txt
+```
 
-4. **Ejecutar Jupyter Notebook**
+### 4. Lanzar Jupyter Notebook
 
-   ```bash
-   pip install notebook
-   jupyter notebook
-   ```
+Instala el gestor interactivo y arranca el servidor local:
+
+```bash
+pip install notebook
+jupyter notebook
+```
+
+Esto abrirá una nueva pestaña en tu navegador web por defecto, mostrando el árbol de directorios desde el cual podrás abrir, modificar y ejecutar celda por celda cualquier archivo `.ipynb`.

@@ -1,59 +1,87 @@
-# LatencyzeroClient
+# 🖥️ LatencyZero Client (Frontend Core)
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.15.
+Bienvenido al directorio principal del **Cliente de LatencyZero**. Este proyecto ha sido desarrollado utilizando el framework web **Angular**, ofreciendo una interfaz de usuario interactiva, rápida y fluida para consumir los servicios de Inteligencia Artificial y bases de conocimiento de nuestro ecosistema.
 
-## Development server
+Esta documentación está enfocada para el equipo técnico y desarrolladores, pero redactada de forma accesible y directa.
 
-To start a local development server, run:
+Este proyecto fue generado con [Angular CLI](https://github.com/angular/angular-cli) versión 20.3.15.
+
+![Node Version](https://img.shields.io/badge/node-v22.22.0-339933?logo=node.js&logoColor=white)
+![Angular CLI Version](https://img.shields.io/badge/angular_cli-v20.3.15-DD0031?logo=angular&logoColor=white)
+
+---
+
+## ⚡ Servidor de Desarrollo
+
+Para iniciar el servidor de desarrollo local y previsualizar la aplicación:
+
+1. Ejecuta el comando `ng serve` en tu terminal o consola de comandos.
+2. Abre tu navegador web favorito y dirígete a `http://localhost:4200/`.
+
+La aplicación se recargará automáticamente en el navegador cada vez que modifiques y guardes cualquier archivo del código fuente.
+
+---
+
+## 🏗️ Generación de Componentes y Código (Scaffolding)
+
+Angular CLI proporciona una forma rápida de generar nuevas piezas de código, respetando la arquitectura del framework.
+
+Para crear un nuevo **componente**, ejecuta:
 
 ```bash
-ng serve
+ng generate component nombre-del-componente
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+> **Consejo:** Puedes utilizar este mismo comando para crear otros elementos estructurales del proyecto como directivas, pipes, servicios, clases, guardias (guards) o interfaces. Por ejemplo: `ng generate service nombre-del-servicio`.
 
-## Code scaffolding
+---
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## 🚀 Construcción para Producción (Build)
 
-```bash
-ng generate component component-name
-```
+Cuando la aplicación esté lista para ser desplegada en un servidor en vivo (producción), debes compilarla y optimizarla.
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
+Para generar la versión de producción, ejecuta:
 
 ```bash
 ng build
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+Este proceso empaquetará la aplicación y almacenará los artefactos compilados (archivos HTML, CSS y JS minificados y optimizados) dentro del directorio `dist/`. Estos archivos son los que se deben subir al servidor web (por ejemplo, Nginx, Apache, Vercel, etc.).
 
-## Running unit tests
+---
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+## 🧪 Pruebas Unitarias (Unit Testing)
+
+Las pruebas unitarias garantizan que las piezas individuales de la aplicación funcionen correctamente de forma aislada.
+
+Para ejecutar las pruebas unitarias a través de [Karma](https://karma-runner.github.io), utiliza el comando:
 
 ```bash
 ng test
 ```
 
-## Running end-to-end tests
+---
 
-For end-to-end (e2e) testing, run:
+## 🌍 Pruebas de Integración (End-to-End Testing)
+
+Las pruebas de integración (E2E) simulan el comportamiento real de un usuario interactuando con la aplicación completa en el navegador.
+
+Para ejecutar las pruebas End-to-End, ejecuta:
 
 ```bash
 ng e2e
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+> **Nota importante:** Antes de ejecutar las pruebas E2E por primera vez, asegúrate de añadir un paquete de pruebas que lo soporte, ejecutando: `ng add @angular/e2e`.
 
-## Additional Resources
+---
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## 📚 Documentación Adicional
+
+Para obtener más información sobre las capacidades, configuración y comandos avanzados de Angular CLI, te invitamos a consultar la documentación oficial o ejecutar el comando de ayuda interactiva:
+
+```bash
+ng help
+```
+
+También puedes visitar el repositorio oficial del equipo de Angular CLI: [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).

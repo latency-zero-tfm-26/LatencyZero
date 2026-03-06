@@ -1,37 +1,41 @@
 ![](/img/LatencyZero.png)
 # LatencyZero
 
-LatencyZero es una plataforma web diseñada para facilitar el acceso al conocimiento tecnológico relacionado con el montaje, configuración y compatibilidad de componentes informáticos. Su objetivo principal es permitir que cualquier usuario, independientemente de su nivel de experiencia, pueda aprender, tomar decisiones informadas y construir o mejorar su equipo de manera sencilla y segura.
+**LatencyZero** es una plataforma web innovadora y robusta diseñada para facilitar el acceso al conocimiento tecnológico relacionado con el montaje, la configuración y la compatibilidad de componentes informáticos. Su principal propósito es proporcionar las herramientas necesarias para que cualquier usuario —desde principiantes hasta entusiastas experimentados— pueda aprender, tomar decisiones fundamentadas y construir o mejorar su equipo informático de una manera sencilla, intuitiva y segura.
 
-La plataforma integra un agente inteligente junto con diversas herramientas interactivas que guían al usuario paso a paso en el proceso de selección, comparación y compatibilidad de componentes.
+Nuestra plataforma integra un potente **agente inteligente** alimentado por Inteligencia Artificial, que trabaja en conjunto con diversas herramientas interactivas y modelos de visión artificial, diseñadas para guiar al usuario en cada etapa del proceso de selección, análisis de compatibilidad y comparación de componentes hardware.
 
-**TFM del Máster de FP en Inteligencia Artificial y Big Data - CPIFP Alan Turing**
+**Trabajo de Fin de Máster (TFM) del Máster de Formación Profesional en Inteligencia Artificial y Big Data - CPIFP Alan Turing**
 
-## Justificación del proyecto
+---
 
-En la actualidad, un ordenador de sobremesa es una herramienta imprescindible para muchas personas, tanto en el ámbito profesional y académico como en el entretenimiento. Sin embargo, aunque muchas personas necesitan un equipo adaptado a sus necesidades, no todas cuentan con los conocimientos técnicos necesarios para elegir los componentes adecuados, verificar su compatibilidad o realizar modificaciones con seguridad.
+## 🎯 Justificación del Proyecto
 
-Por ello, disponer de una herramienta que asesore al usuario, le acompañe durante el proceso, resuelva sus dudas y ofrezca utilidades prácticas relacionadas con la selección y configuración de componentes resulta fundamental. Una plataforma de este tipo no solo facilita la toma de decisiones, sino que también reduce errores y evita gastos innecesarios.
+En la era digital actual, un ordenador de sobremesa es una herramienta fundamental e imprescindible, tanto en el ámbito profesional y académico, como en el del entretenimiento. No obstante, aunque una gran mayoría de usuarios necesita un equipo que se adapte milimétricamente a sus requerimientos y presupuesto, pocos cuentan con los conocimientos técnicos especializados para elegir adecuadamente cada pieza, verificar la sinergia de los componentes o realizar actualizaciones con total seguridad.
 
-Además, no está pensada únicamente para principiantes. Incluso quienes ya poseen conocimientos en el área pueden beneficiarse de una herramienta que centralice información, agilice consultas y ofrezca apoyo técnico de forma rápida y accesible.
+Es por ello que la creación de una plataforma capaz de actuar como un asesor virtual, acompañando al usuario en la resolución de sus dudas y proporcionando utilidades prácticas sobre configuración y selección de hardware, resulta crítica. Un sistema de estas características no sólo agiliza y respalda el proceso de toma de decisiones, sino que minimiza significativamente la probabilidad de errores de ensamblaje y compras innecesarias o incompatibles.
 
-En este contexto, una solución como LatencyZero aporta valor al democratizar el acceso al conocimiento tecnológico y simplificar un proceso que, de otro modo, puede resultar complejo e intimidante.
+Además, **LatencyZero** ha sido ideado no solo como un asistente para novatos en el mundo del hardware. Los profesionales y aquellos con conocimientos avanzados también obtendrán un gran beneficio de un sistema que centraliza y filtra información actualizada, acelerando las búsquedas y consultas técnicas, reduciendo el margen de error, y ofreciendo asistencia experta al instante.
 
+En definitiva, **LatencyZero** aporta un valor diferencial indiscutible al democratizar el acceso al conocimiento tecnológico especializado, transformando una labor frecuentemente compleja y desafiante en un proceso accesible, didáctico y directo.
+
+---
 
 ## 🖥️ HardVisionAI
 
-**HardVisionAI** es un modelo de visión artificial diseñado para identificar componentes de PC a partir de imágenes y extraer automáticamente información técnica relevante, como marca, modelo y especificaciones.
+**HardVisionAI** es un modelo avanzado de visión artificial que ha sido entrenado y optimizado en nuestro ecosistema para identificar, clasificar y extraer información automáticamente de diversos componentes de ordenador mediante el análisis de imágenes. Es capaz de deducir datos técnicos cruciales como la marca, el modelo y sus especificaciones clave.
 
-En este proyecto se utilizará tanto como herramienta para el agente como integrada dentro de la propia aplicación.
+Dentro de LatencyZero, HardVisionAI cumple una función dual: por un lado, asiste y alimenta de información técnica al Agente Inteligente, y por otro, ofrece funcionalidades integradas directamente en la interfaz de la aplicación para el análisis de componentes por parte del usuario.
 
-En su fase inicial, el modelo se desarrolló junto con una demo en un repositorio independiente. En este proyecto se ofrece una versión accesible mediante **Streamlit**, que permite realizar pruebas interactivas y explorar su funcionamiento de forma sencilla.
+Originalmente, el modelo y su correspondiente demostración fueron conceptualizados y desarrollados en un repositorio paralelo de fase temprana. Con el objetivo de facilitar su prueba por parte de cualquier persona, hemos desplegado una versión interactiva mediante **Streamlit**, la cual permite visualizar y entender el potencial de HardVisionAI de forma clara e intuitiva.
 
-Todo lo que se utilice en este proyecto se almacenará también en este repositorio, pero la versión preliminar original contiene información más detallada y una demo rápida.
+Aunque toda la estructura esencial de los modelos reside en este repositorio principal de LatencyZero, el repositorio preliminar original alberga explicaciones aún más minuciosas del desarrollo técnico y de la prueba inicial.
 
 [![HardVisionAI](https://img.shields.io/badge/HardVisionAI-GitHub-181717?style=flat\&logo=github\&logoColor=white)](https://github.com/Latency-Zero-tfm/HardVisionAI)
 [![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://hardvisionai.streamlit.app/)
 ![Python Version](https://img.shields.io/badge/python-3.12-blue?logo=python\&logoColor=white)
 
+---
 
 ## 👤 Créditos
 
@@ -41,27 +45,28 @@ Todo lo que se utilice en este proyecto se almacenará también en este reposito
 * [Alvaro López Guerrero](https://github.com/Alvalogue72)
 * [Andrei Munteanu Popa](https://github.com/andu8705)
 
-🎓 Repositorio del centro: [iabd-tfm-2526](https://github.com/CPIFPAlanTuring/iabd-tfm-2526) 
+🎓 Repositorio del centro educativo: [iabd-tfm-2526](https://github.com/CPIFPAlanTuring/iabd-tfm-2526)
 
 Máster de FP en Inteligencia Artifical y Big Data - CPIFP Alan Turing
 
  `Curso 2025/2026`
 
-<img src="./img/alan_turing.png" width="150"/>
+<div align="center">
+  <img src="./img/alan_turing.png" width="150" alt="Logo CPIFP Alan Turing"/>
+</div>
 
 ### 📄 Licencia
 
 ![License](https://img.shields.io/badge/license-LatencyZero%20Custom-blue)
 
-Este proyecto está protegido por derechos de autor. No se permite su uso, copia, modificación, distribución ni creación de obras derivadas sin autorización expresa de los autores.
+Este proyecto y todo su código asociado están protegidos por derechos de autor. No se permite su uso, copia, modificación, distribución ni la creación de obras derivadas sin la autorización expresa y por escrito de los autores mencionados.
 
 © 2026 Alejandro-BR, Alvalogue72, andu8705. Todos los derechos reservados.  
-Para consultas o permisos especiales, contactar a: [latencyzero.tfm@gmail.com](mailto:latencyzero.tfm@gmail.com)
+Para cualquier tipo de consulta comercial, colaboraciones o permisos especiales, por favor contactar a través de: [latencyzero.tfm@gmail.com](mailto:latencyzero.tfm@gmail.com)
 
 ---
 
-
-⭐ Si te ha gustado este repo, dale una estrellita 😉
+⭐ Si este proyecto te ha resultado interesante o útil, ¡te agradeceríamos que nos apoyaras dándole una estrella en GitHub! 😉
 
 ![GitHub Repo Stars](https://img.shields.io/github/stars/Latency-Zero-tfm/LatencyZero?style=social)
 ![Last Commit](https://img.shields.io/github/last-commit/Latency-Zero-tfm/LatencyZero)

@@ -1,123 +1,52 @@
-# 🗃️ Data
+# 🗃️ Data & Dataset
 
-Los datos utilizados para entrenar los modelos se obtuvieron mediante técnicas de **web scraping** y fueron posteriormente recopilados y procesados para su análisis y preparación en este proyecto.
+Este directorio es el núcleo del almacenamiento, recopilación y estructuración de los datos utilizados para entrenar nuestros modelos de inteligencia artificial (visión e inferencia) y nutrir la base de conocimientos de los agentes de **LatencyZero**. Toda la información contenida aquí ha sido meticulosamente conseguida y adaptada mediante técnicas estructuradas de **Web Scraping** y procesos de limpieza de datos (ETL).
 
-Las fuentes de información incluyeron sitios web especializados en componentes de PC:  
+Las fuentes primarias de información se basan en los portales líderes en componentes de PC a nivel global, lo que nos ha garantizado la creación de un dataset (conjunto de datos) veraz, representativo y de alta calidad para el entrenamiento óptimo de los modelos.
 
+**Fuentes clave del dataset:**
 - [PCComponentes](https://www.pccomponentes.com)  
 - [TechPowerUp](https://www.techpowerup.com)  
 - [PCPartPicker](https://pcpartpicker.com)
 - [Pangoly](https://pangoly.com)
 - [Steam](https://store.steampowered.com)
 
-Estos portales proporcionan información detallada sobre marcas, modelos y especificaciones técnicas, lo que permitió construir un dataset representativo y de calidad para el entrenamiento del modelo.
+Estos portales proveen información crucial detallando cientos de miles de marcas, especificaciones técnicas de alta precisión (sockets, arquitecturas, consumos), compatibilidades cruzadas y fotografías estructuradas de cada componente.
 
 ![dataset](/img/dataset_components_03.png)
 
-Además, se incluyen requisitos de hardware para videojuegos obtenidos mediante **web scraping** de [Steam](https://store.steampowered.com/?l=spanish). Estos datos permiten que el agente disponga de información local sobre requisitos mínimos y recomendados en caso de que el usuario consulte sobre compatibilidad con videojuegos.
+Como información complementaria vital, hemos extraído y procesado automáticamente los **requisitos de hardware mínimos y recomendados de videojuegos** a través de la API y páginas de Steam en español. Gracias a este trabajo, el agente IA posee un contexto actualizado para asesorar a los usuarios que preguntan: *"¿Es mi ordenador compatible con el juego X?"*.
 
-## 📂 Estructura del proyecto
+---
 
-```
-.
+## 📂 Estructura del Directorio de Datos
+
+A continuación, se detalla el árbol de carpetas del proyecto, indicando cómo fluye la información desde su estado virgen hasta su formato final procesado:
+
+```text
+data/
 ├── README.md
-├── images
-├── processed
-│   ├── components_01.csv
-│   ├── components_01.json
-│   ├── components_02.csv
-│   ├── components_03.csv
-│   └── components_04.csv
+├── images/               # Recursos gráficos (imágenes) escrapeados para entrenamiento visual.
+├── raw/                  # Datos originales en crudo obtenidos directamente mediante scraping web.
+│   ├── ai_db_vectorial/      # Archivos JSONL preparados para inyección vectorial de la IA (RAG).
+│   ├── pangoly/              # Datos en bruto extraídos de Pangoly.
+│   ├── pccomponentes/        # Datos extraídos (CSV y JSON) de PCComponentes.
+│   ├── pcpartpicker/         # Bases de datos completas de PCPartPicker divididas por categoría.
+│   ├── steam/                # Estadísticas y encuestas de hardware sacadas de Steam y requirimientos.
+│   └── techpowerup/          # Información en crudo de CPUs (arquitecturas, frecuencias, TDP, etc).
 │
-└── raw
-    ├── ai_db_vectorial
-    │   ├── cases_pcpartpicker.jsonl
-    │   ├── cpu_cooler_pcpartpicker.jsonl
-    │   ├── cpu_pcpartpicker.jsonl
-    │   ├── gpu_pcpartpicker.jsonl
-    │   ├── hw_survey_full.json
-    │   ├── monitor_pcpartpicker.jsonl
-    │   ├── motherboard_pcpartpicker.jsonl
-    │   ├── os_pcpartpicker.jsonl
-    │   ├── pangoly.jsonl
-    │   ├── pcpartpicker_motherboards+components.jsonl
-    │   ├── productos_cpu.json
-    │   ├── productos_pccomponentes.json
-    │   ├── psu_pcpartpicker.jsonl
-    │   ├── ram_pcpartpicker.jsonl
-    │   ├── req_minimos.json
-    │   ├── req_recomendados.json
-    │   ├── storage_pcpartpicker.jsonl
-    │   ├── top1_hw.json
-    │   ├── top2_hw.json
-    │   └── top3_hw.json
-    │
-    ├── pangoly
-    │   └── pangoly.jsonl
-    │
-    ├── pccomponentes
-    │   ├── productos_pccomponentes.csv
-    │   └── productos_pccomponentes.json
-    │
-    ├── pcpartpicker
-    │   ├── cases_pcpartpicker.jsonl
-    │   ├── cpu_cooler_pcpartpicker.jsonl
-    │   ├── cpu_pcpartpicker.jsonl
-    │   ├── gpu_pcpartpicker.jsonl
-    │   ├── monitor_pcpartpicker.jsonl
-    │   ├── motherboard_pcpartpicker.jsonl
-    │   ├── os_pcpartpicker.jsonl
-    │   ├── psu_pcpartpicker.jsonl
-    │   ├── ram_pcpartpicker.jsonl
-    │   ├── storage_pcpartpicker.jsonl
-    │   ├── csv
-    │   │   ├── cases_pspartpicker.csv
-    │   │   ├── cpu_cooler_pspartpicker.csv
-    │   │   ├── cpu_pspartpicker.csv
-    │   │   ├── gpu_pspartpicker.csv
-    │   │   ├── monitor_pspartpicker.csv
-    │   │   ├── motherboard_pspartpicker.csv
-    │   │   ├── os_pspartpicker.csv
-    │   │   ├── psu_pspartpicker.csv
-    │   │   ├── ram_pspartpicker.csv
-    │   │   └── storage_pspartpicker.csv
-    │   │
-    │   └── json
-    │       ├── cases_pspartpicker.json
-    │       ├── cpu_cooler_pspartpicker.json
-    │       ├── cpu_pspartpicker.json
-    │       ├── gpu_pspartpicker.json
-    │       ├── monitor_pspartpicker.json
-    │       ├── motherboard_pspartpicker.json
-    │       ├── os_pspartpicker.json
-    │       ├── psu_pspartpicker.json
-    │       ├── ram_pspartpicker.json
-    │       └── storage_pspartpicker.json
-    │
-    ├── steam
-    │   ├── csv_data
-    │   │   ├── hw_survey_full.csv
-    │   │   ├── req_minimos.csv
-    │   │   ├── req_recomendados.csv
-    │   │   └── ranked_hardware/
-    │   │       ├── top1_hw.csv
-    │   │       ├── top2_hw.csv
-    │   │       └── top3_hw.csv
-    │   │
-    │   └── json_data
-    │       ├── hw_survey_full.json
-    │       ├── req_minimos.json
-    │       ├── req_recomendados.json
-    │       └── ranked_hardware/
-    │           ├── top1_hw.json
-    │           ├── top2_hw.json
-    │           └── top3_hw.json
-    │
-    └── techpowerup
-        ├── productos_cpu.csv
-        └── productos_cpu.json
+└── processed/            # Datos limpios, normalizados y estructurados listos para ML.
+    ├── components_01.csv
+    ├── components_01.json
+    ├── components_02.csv
+    ├── components_03.csv
+    └── components_04.csv
 ```
 
-- `raw/` → Datos originales obtenidos mediante scraping.
-- `processed/` → Datos limpios y transformados listos para análisis y entrenamiento.
-- `images/` → Recursos gráficos obtenidos mediante scraping para el entrenamiento.
+### Explicación del Flujo de Datos (Data Pipeline)
+
+1. **`raw/` (Datos en bruto):** Aquí se almacenan los volcados directos de los scripts de web scraping. Contienen ruido, inconsistencias y formatos mixtos (CSV, JSON, JSONL). Sirven como la "verdad absoluta" desde la cual partimos.
+
+2. **`processed/` (Datos limpios):** Los notebooks de Python procesan los archivos en `raw/`, limpiando valores nulos, estandarizando unidades métricas (por ejemplo, asegurando que toda la memoria RAM esté en GB o MHz) y uniendo bases de datos dispares para crear los ficheros consolidados (`components_xx.csv`). Estos archivos son los que se utilizan directamente en el entrenamiento del agente y de las redes neuronales.
+
+3. **`images/` (Recursos gráficos):** En paralelo a los metadatos textuales, nuestros scripts descargan fotografías de alta resolución de las partes, las cuales son procesadas posteriormente para la red neuronal convolucional del proyecto (`HardVisionAI`).
