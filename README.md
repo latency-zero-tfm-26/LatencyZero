@@ -7,8 +7,6 @@ Nuestra plataforma integra un potente **agente inteligente** alimentado por Inte
 
 **Trabajo de Fin de Máster (TFM) del Máster de Formación Profesional en Inteligencia Artificial y Big Data - CPIFP Alan Turing**
 
----
-
 ## 🎯 Justificación del Proyecto
 
 En la era digital actual, un ordenador de sobremesa es una herramienta fundamental e imprescindible, tanto en el ámbito profesional y académico, como en el del entretenimiento. No obstante, aunque una gran mayoría de usuarios necesita un equipo que se adapte milimétricamente a sus requerimientos y presupuesto, pocos cuentan con los conocimientos técnicos especializados para elegir adecuadamente cada pieza, verificar la sinergia de los componentes o realizar actualizaciones con total seguridad.
@@ -19,23 +17,17 @@ Además, **LatencyZero** ha sido ideado no solo como un asistente para novatos e
 
 En definitiva, **LatencyZero** aporta un valor diferencial indiscutible al democratizar el acceso al conocimiento tecnológico especializado, transformando una labor frecuentemente compleja y desafiante en un proceso accesible, didáctico y directo.
 
----
-
 ## 🖥️ HardVisionAI
 
 **HardVisionAI** es un modelo avanzado de visión artificial que ha sido entrenado y optimizado en nuestro ecosistema para identificar, clasificar y extraer información automáticamente de diversos componentes de ordenador mediante el análisis de imágenes. Es capaz de deducir datos técnicos cruciales como la marca, el modelo y sus especificaciones clave.
 
 Dentro de LatencyZero, HardVisionAI cumple una función dual: por un lado, asiste y alimenta de información técnica al Agente Inteligente, y por otro, ofrece funcionalidades integradas directamente en la interfaz de la aplicación para el análisis de componentes por parte del usuario.
 
-Originalmente, el modelo y su correspondiente demostración fueron conceptualizados y desarrollados en un repositorio paralelo de fase temprana. Con el objetivo de facilitar su prueba por parte de cualquier persona, hemos desplegado una versión interactiva mediante **Streamlit**, la cual permite visualizar y entender el potencial de HardVisionAI de forma clara e intuitiva.
-
-Aunque toda la estructura esencial de los modelos reside en este repositorio principal de LatencyZero, el repositorio preliminar original alberga explicaciones aún más minuciosas del desarrollo técnico y de la prueba inicial.
+Originalmente, el modelo y su correspondiente demostración fueron conceptualizados y desarrollados en un repositorio paralelo de fase temprana. Con el objetivo de facilitar su prueba por parte de cualquier persona, hemos desplegado una versión interactiva mediante **Streamlit**, la cual permite visualizar y entender el potencial de HardVisionAI de forma clara e intuitiva. Es una versión no definitiva, pero que muestra el potencial del modelo y su utilidad para el proyecto.
 
 [![HardVisionAI](https://img.shields.io/badge/HardVisionAI-GitHub-181717?style=flat\&logo=github\&logoColor=white)](https://github.com/Latency-Zero-tfm/HardVisionAI)
 [![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://hardvisionai.streamlit.app/)
 ![Python Version](https://img.shields.io/badge/python-3.12-blue?logo=python\&logoColor=white)
-
----
 
 ## 👤 Créditos
 
@@ -51,9 +43,7 @@ Máster de FP en Inteligencia Artifical y Big Data - CPIFP Alan Turing
 
  `Curso 2025/2026`
 
-<div align="center">
-  <img src="./img/alan_turing.png" width="150" alt="Logo CPIFP Alan Turing"/>
-</div>
+<img src="./img/alan_turing.png" width="150" alt="Logo CPIFP Alan Turing"/>
 
 ### 📄 Licencia
 
